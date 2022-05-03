@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StarterBank.Data;
 
 namespace StarterBank.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220503164528_updateCaixa")]
+    partial class updateCaixa
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -61,16 +63,18 @@ namespace StarterBank.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("CartaoId")
+                    b.Property<int?>("ClienteId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Numero")
-                        .HasColumnType("longtext");
+                    b.Property<long>("Numero")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Senha")
                         .HasColumnType("longtext");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ClienteId");
 
                     b.ToTable("Cartoes");
                 });
@@ -109,9 +113,6 @@ namespace StarterBank.Migrations
                     b.Property<int>("Agencia")
                         .HasColumnType("int");
 
-                    b.Property<int>("CartaoId")
-                        .HasColumnType("int");
-
                     b.Property<string>("NomeBanco")
                         .HasColumnType("longtext");
 
@@ -121,12 +122,23 @@ namespace StarterBank.Migrations
                     b.Property<float>("Saldo")
                         .HasColumnType("float");
 
+                    b.Property<int?>("cartaoId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("CartaoId")
-                        .IsUnique();
+                    b.HasIndex("cartaoId");
 
                     b.ToTable("Contas");
+                });
+
+            modelBuilder.Entity("StarterBank.Model.Cartao", b =>
+                {
+                    b.HasOne("StarterBank.Model.Cliente", "Cliente")
+                        .WithMany()
+                        .HasForeignKey("ClienteId");
+
+                    b.Navigation("Cliente");
                 });
 
             modelBuilder.Entity("StarterBank.Model.Cliente", b =>
@@ -140,18 +152,11 @@ namespace StarterBank.Migrations
 
             modelBuilder.Entity("StarterBank.Model.Conta", b =>
                 {
-                    b.HasOne("StarterBank.Model.Cartao", "Cartao")
-                        .WithOne("Conta")
-                        .HasForeignKey("StarterBank.Model.Conta", "CartaoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasOne("StarterBank.Model.Cartao", "cartao")
+                        .WithMany()
+                        .HasForeignKey("cartaoId");
 
-                    b.Navigation("Cartao");
-                });
-
-            modelBuilder.Entity("StarterBank.Model.Cartao", b =>
-                {
-                    b.Navigation("Conta");
+                    b.Navigation("cartao");
                 });
 #pragma warning restore 612, 618
         }

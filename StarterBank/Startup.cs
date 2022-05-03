@@ -1,9 +1,12 @@
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using StarterBank.Data;
 
@@ -24,12 +27,48 @@ namespace StarterBank
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<ApplicationDbContext>(options =>
             options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
-            
+
+            string securityKey = "starterbank_api_rest_projeto_starter";
+            var symmectricKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(securityKey));
+
+            //Diz oo sistema que vamos usar jwt como forma de autenticação
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+                options.TokenValidationParameters = new TokenValidationParameters  //definindo como o sistema deve ler nosso token
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = "STARTERBANKAPI",
+                    ValidAudience = "usuario_comum",
+                    IssuerSigningKey = symmectricKey,
+                }
+            );
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "StarterBank", Version = "v1" });
-            });
+             {
+                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "StarterBank", Version = "v1", Description = "Usuário: Admin Senha: Gft@1234" });
+                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                 {
+                     In = ParameterLocation.Header,
+                     Description = "Please insert token",
+                     Name = "Authorization",
+                     Type = SecuritySchemeType.Http,
+                     BearerFormat = "JWT",
+                     Scheme = "bearer"
+                 });
+                 c.AddSecurityRequirement(new OpenApiSecurityRequirement{
+                     {
+                         new OpenApiSecurityScheme{
+                             Reference=new OpenApiReference  {
+                                    Type=ReferenceType.SecurityScheme,
+                                    Id="Bearer"
+                             }
+                         },
+                         new string[]{}
+                     }
+               });
+             });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,6 +80,12 @@ namespace StarterBank
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "StarterBank v1"));
             }
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "mniaAPI v1");
+            });
 
             app.UseHttpsRedirection();
 

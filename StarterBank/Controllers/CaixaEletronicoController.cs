@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using StarterBank.Data;
 using StarterBank.Model;
+using StarterBank.Model.DTO;
 
 namespace StarterBank.Controllers
 {
@@ -13,7 +14,6 @@ namespace StarterBank.Controllers
     [Route("api/v1/[controller]")]
     public class CaixaEletronicoController : ControllerBase
     {
-
         private readonly ApplicationDbContext database;
         public CaixaEletronicoController(ApplicationDbContext database)
         {
@@ -51,7 +51,7 @@ namespace StarterBank.Controllers
         }
 
         [HttpPost]
-        public IActionResult NovoCaixa([FromBody] CaixaDepositoDTO model)
+        public IActionResult NovoCaixa([FromBody] CaixaEletronicoDTO model)
         {
             try
             {
@@ -63,6 +63,8 @@ namespace StarterBank.Controllers
                 caixa.nota20 = model.nota20;
                 caixa.nota50 = model.nota50;
                 caixa.nota100 = model.nota100;
+                caixa.Banco = model.Banco;
+                caixa.FaixaDoBanco = model.FaixaDoBanco;
                 caixa.Saldo += model.nota10 * Cedula.Dez + model.nota20 * Cedula.Vinte + model.nota50 * Cedula.Cinquenta + model.nota100 * Cedula.Cem;
 
                 if (caixa.Saldo <= 0) return NoContent();
@@ -80,7 +82,7 @@ namespace StarterBank.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult AdicionaSaldo(int id, [FromBody] CaixaDepositoDTO model)
+        public IActionResult AdicionaSaldo(int id, [FromBody] CaixaEletronicoDTO model)
         {
             try
             {
@@ -92,6 +94,8 @@ namespace StarterBank.Controllers
                 caixa.nota20 += model.nota20;
                 caixa.nota50 += model.nota50;
                 caixa.nota100 += model.nota100;
+                caixa.Banco = model.Banco;
+                caixa.FaixaDoBanco = model.FaixaDoBanco;
                 caixa.Saldo += model.nota10 * Cedula.Dez + model.nota20 * Cedula.Vinte + model.nota50 * Cedula.Cinquenta + model.nota100 * Cedula.Cem;
 
                 database.Update(caixa);
@@ -164,55 +168,17 @@ namespace StarterBank.Controllers
             }
         }
 
-        [HttpPost("{id}")]
-        public IActionResult DeletarCaixa(int id, [FromBody] CaixaSaqueDTO model)
+        [HttpDelete("{id}")]
+        public IActionResult DeletarCaixa(int id)
         {
 
             try
             {
                 var caixa = database.CaixaEletronico.First(i => i.Id == id);
 
-                var cedulasSacadas = new List<int>();
-                int valorRestanteASerSacado = model.ValorSaque;
-
-                while (valorRestanteASerSacado >= Cedula.Cem)
-                {
-                    cedulasSacadas.Add(Cedula.Cem);
-                    caixa.nota100 -= 1;
-                    caixa.Saldo -= Cedula.Cem;
-                    valorRestanteASerSacado = valorRestanteASerSacado - Cedula.Cem;
-                }
-
-                while (valorRestanteASerSacado >= Cedula.Cinquenta)
-                {
-                    cedulasSacadas.Add(Cedula.Cinquenta);
-                    caixa.nota50 -= 1;
-                    caixa.Saldo -= Cedula.Cinquenta;
-                    valorRestanteASerSacado = valorRestanteASerSacado - Cedula.Cinquenta;
-                }
-
-                while (valorRestanteASerSacado >= Cedula.Vinte)
-                {
-                    cedulasSacadas.Add(Cedula.Vinte);
-                    caixa.nota20 -= 1;
-                    caixa.Saldo -= Cedula.Vinte;
-                    valorRestanteASerSacado = valorRestanteASerSacado - Cedula.Vinte;
-                }
-
-                while (valorRestanteASerSacado >= Cedula.Dez)
-                {
-                    cedulasSacadas.Add(Cedula.Dez);
-                    caixa.nota10 -= 1;
-                    caixa.Saldo -= Cedula.Dez;
-                    valorRestanteASerSacado = valorRestanteASerSacado - Cedula.Dez;
-                }
-                if (cedulasSacadas.Count == 0)
-                    throw new Exception("Não há cedulas disponíveis para o valor solicitado.");
-
-                caixa.ValorSaque += model.ValorSaque; //Valor sacado total
-                database.Update(caixa);
+                database.Remove(caixa);
                 database.SaveChanges();
-                return Ok(cedulasSacadas);
+                return Ok(caixa + " Deletado com sucesso.");
 
             }
             catch (Exception ex)
@@ -221,7 +187,6 @@ namespace StarterBank.Controllers
                   $"Erro ao tentar sacar no caixa. Erro: {ex.Message}");
             }
         }
-
 
         //Guarda o valor da cedula
         public static class Cedula

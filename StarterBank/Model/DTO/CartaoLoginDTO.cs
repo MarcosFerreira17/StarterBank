@@ -2,11 +2,11 @@ using System.ComponentModel.DataAnnotations;
 
 namespace StarterBank.Model
 {
-    public class Cartao
+    public class CartaoLoginDTO
     {
-        [Key]
-        public int Id { get; set; }
-        public string Numero { get; set; }
+        [Required]
+        public long Numero { get; set; }
+        [Required]
         public string Senha { get; set; }
 
     }
