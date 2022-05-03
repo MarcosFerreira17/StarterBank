@@ -1,12 +1,7 @@
-using System;
-using System.Linq;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using StarterBank.Data;
-using StarterBank.Model;
 
-namespace StarterBank.Controller
+namespace StarterBank.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]

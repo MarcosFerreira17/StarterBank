@@ -12,7 +12,6 @@ namespace StarterBank.Model
         public int Saldo { get; set; }
         public int ValorSaque { get; set; }
         public DateTime Data { get; set; }
-        public Cartao Cartao { get; set; }
-    
+
     }
 }

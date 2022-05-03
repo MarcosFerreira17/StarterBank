@@ -1010,19 +1010,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\marco\\.nuget\\packages\\": {}
+    "C:\\Users\\mnia\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\dev\\StarterBank\\StarterBank\\StarterBank.csproj",
+      "projectUniqueName": "c:\\dev\\Projeto_Starter\\Desafio_TDD\\API_StarterBank\\StarterBank\\StarterBank.csproj",
       "projectName": "StarterBank",
-      "projectPath": "c:\\dev\\StarterBank\\StarterBank\\StarterBank.csproj",
-      "packagesPath": "C:\\Users\\marco\\.nuget\\packages\\",
-      "outputPath": "c:\\dev\\StarterBank\\StarterBank\\obj\\",
+      "projectPath": "c:\\dev\\Projeto_Starter\\Desafio_TDD\\API_StarterBank\\StarterBank\\StarterBank.csproj",
+      "packagesPath": "C:\\Users\\mnia\\.nuget\\packages\\",
+      "outputPath": "c:\\dev\\Projeto_Starter\\Desafio_TDD\\API_StarterBank\\StarterBank\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\marco\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\mnia\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net5.0"
@@ -1089,7 +1089,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files (x86)\\dotnet\\sdk\\5.0.407\\RuntimeIdentifierGraph.json"
       }
     }
   }

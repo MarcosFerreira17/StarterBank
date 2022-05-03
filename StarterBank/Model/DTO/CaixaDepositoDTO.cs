@@ -8,7 +8,6 @@ namespace StarterBank.Model
         public int nota50 { get; set; }
         public int nota20 { get; set; }
         public int nota10 { get; set; }
-        public DateTime Data { get; set; }
-    
+
     }
 }

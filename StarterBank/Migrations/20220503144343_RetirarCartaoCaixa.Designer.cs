@@ -9,8 +9,8 @@ using StarterBank.Data;
 namespace StarterBank.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220503011139_InitialCreation")]
-    partial class InitialCreation
+    [Migration("20220503144343_RetirarCartaoCaixa")]
+    partial class RetirarCartaoCaixa
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,9 +23,6 @@ namespace StarterBank.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<int?>("CartaoId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Data")
@@ -51,8 +48,6 @@ namespace StarterBank.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CartaoId");
-
                     b.ToTable("CaixaEletronico");
                 });
 
@@ -62,21 +57,18 @@ namespace StarterBank.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int?>("ContaId")
+                    b.Property<int?>("ClienteId")
                         .HasColumnType("int");
 
                     b.Property<long>("Numero")
                         .HasColumnType("bigint");
-
-                    b.Property<float>("Saldo")
-                        .HasColumnType("float");
 
                     b.Property<string>("Senha")
                         .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ContaId");
+                    b.HasIndex("ClienteId");
 
                     b.ToTable("Cartoes");
                 });
@@ -121,27 +113,26 @@ namespace StarterBank.Migrations
                     b.Property<string>("Numero")
                         .HasColumnType("longtext");
 
+                    b.Property<float>("Saldo")
+                        .HasColumnType("float");
+
+                    b.Property<int?>("cartaoId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("cartaoId");
 
                     b.ToTable("Contas");
                 });
 
-            modelBuilder.Entity("StarterBank.Model.CaixaEletronico", b =>
-                {
-                    b.HasOne("StarterBank.Model.Cartao", "Cartao")
-                        .WithMany()
-                        .HasForeignKey("CartaoId");
-
-                    b.Navigation("Cartao");
-                });
-
             modelBuilder.Entity("StarterBank.Model.Cartao", b =>
                 {
-                    b.HasOne("StarterBank.Model.Conta", "Conta")
+                    b.HasOne("StarterBank.Model.Cliente", "Cliente")
                         .WithMany()
-                        .HasForeignKey("ContaId");
+                        .HasForeignKey("ClienteId");
 
-                    b.Navigation("Conta");
+                    b.Navigation("Cliente");
                 });
 
             modelBuilder.Entity("StarterBank.Model.Cliente", b =>
@@ -151,6 +142,15 @@ namespace StarterBank.Migrations
                         .HasForeignKey("ContaId");
 
                     b.Navigation("Conta");
+                });
+
+            modelBuilder.Entity("StarterBank.Model.Conta", b =>
+                {
+                    b.HasOne("StarterBank.Model.Cartao", "cartao")
+                        .WithMany()
+                        .HasForeignKey("cartaoId");
+
+                    b.Navigation("cartao");
                 });
 #pragma warning restore 612, 618
         }

@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StarterBank.Data;
 
 namespace StarterBank.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220503134231_InitialCreation")]
+    partial class InitialCreation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,6 +23,9 @@ namespace StarterBank.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CartaoId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Data")
@@ -45,6 +50,8 @@ namespace StarterBank.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CartaoId");
 
                     b.ToTable("CaixaEletronico");
                 });
@@ -122,6 +129,15 @@ namespace StarterBank.Migrations
                     b.HasIndex("cartaoId");
 
                     b.ToTable("Contas");
+                });
+
+            modelBuilder.Entity("StarterBank.Model.CaixaEletronico", b =>
+                {
+                    b.HasOne("StarterBank.Model.Cartao", "Cartao")
+                        .WithMany()
+                        .HasForeignKey("CartaoId");
+
+                    b.Navigation("Cartao");
                 });
 
             modelBuilder.Entity("StarterBank.Model.Cartao", b =>
