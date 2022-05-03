@@ -19,4 +19,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\StarterBank\StarterBank.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -5,7 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using SearchBank.Data;
+using StarterBank.Data;
 
 namespace StarterBank
 {
@@ -22,8 +22,9 @@ namespace StarterBank
         public void ConfigureServices(IServiceCollection services)
         {
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
-            services.AddDbContext<SearchBankContext>(options =>
+            services.AddDbContext<ApplicationDbContext>(options =>
             options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+            
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

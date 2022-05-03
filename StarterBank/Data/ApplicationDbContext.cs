@@ -3,13 +3,16 @@
 using Microsoft.EntityFrameworkCore;
 using StarterBank.Model;
 
-namespace SearchBank.Data
+namespace StarterBank.Data
 {
-    public class SearchBankContext : DbContext
+    public class ApplicationDbContext : DbContext
     {
         public DbSet<CaixaEletronico> CaixaEletronico { get; set; }
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) { }
-        protected override void OnModelCreating(ModelBuilder modelBuilder) { }
+        public DbSet<Conta> Contas { get; set; }
+        public DbSet<Cartao> Cartoes { get; set; }
+        public DbSet<Cliente> Clientes { get; set; }
 
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
+        protected override void OnModelCreating(ModelBuilder modelBuilder){}
     }
 }
