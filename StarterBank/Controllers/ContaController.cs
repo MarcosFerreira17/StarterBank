@@ -26,10 +26,11 @@ namespace StarterBank.Controllers
                 var dadosCliente = database.Clientes.ToList();
                 Conta conta = new Conta();
 
-                conta.Agencia = model.Agencia;
+                conta.NumeroAgencia = model.Agencia;
                 conta.NomeBanco = model.NomeBanco;
-                conta.Numero = model.Numero;
+                conta.NumeroConta = model.Numero;
                 conta.Saldo = model.Saldo;
+                conta.Cartao.Id = model.CartaoId;
 
                 database.Add(conta);
                 database.SaveChanges();
@@ -41,6 +42,14 @@ namespace StarterBank.Controllers
                    $"Erro ao tentar registrar uma nova Conta, verifique os dados e tente novamente. Erro: {ex.Message}");
             }
         }
+
+
+        // [HttpPost("{id}")]
+        // public IActionResult Saque([FromBody] ContaDTO model)
+        // {
+
+        // }
+
 
     }
 }

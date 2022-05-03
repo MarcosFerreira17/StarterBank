@@ -7,6 +7,6 @@ namespace StarterBank.Model
         public int Agencia { get; set; }
         public float Saldo { get; set; }
         public int CartaoId { get; set; }
-
+        public int CaixaId { get; set; }
     }
 }

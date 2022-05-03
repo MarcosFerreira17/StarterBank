@@ -47,7 +47,7 @@ namespace StarterBank
             services.AddControllers();
             services.AddSwaggerGen(c =>
              {
-                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "StarterBank", Version = "v1", Description = "Usuário: Admin Senha: Gft@1234" });
+                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "StarterBank", Version = "v1", Description = "API de um caixa eletronico, com foco em testes com XUnit" });
                  c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                  {
                      In = ParameterLocation.Header,

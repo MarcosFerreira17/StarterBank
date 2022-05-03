@@ -31,6 +31,7 @@ namespace StarterBank.Controllers
                 cliente.Nome = model.Nome;
                 cliente.Profissao = model.Profissao;
                 cliente.CPF = model.CPF;
+                cliente.Conta.Id = model.ContaId;
 
                 database.Add(cliente);
                 database.SaveChanges();

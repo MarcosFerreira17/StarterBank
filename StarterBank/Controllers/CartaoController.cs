@@ -23,7 +23,6 @@ namespace StarterBank.Controllers
         {
             try
             {
-
                 var cartaoData = database.Cartoes.ToList();
                 var conta = database.Contas.First(i => i.Id == id);
 
@@ -32,7 +31,7 @@ namespace StarterBank.Controllers
                 string EncriptPasswordUser = EncriptPassword.Encripted(cartaoModel.Senha);
 
                 cartao.Numero = GeraNumeroCartao.Generate("1234");
-                cartao.Senha = cartaoModel.Senha;
+                cartao.Senha = EncriptPasswordUser;
 
                 database.Add(cartao);
                 database.SaveChanges();

@@ -113,7 +113,6 @@ namespace StarterBank.Controllers
         [HttpPost("{id}")]
         public IActionResult Saque(int id, [FromBody] CaixaSaqueDTO model)
         {
-
             try
             {
                 var caixa = database.CaixaEletronico.First(i => i.Id == id);
