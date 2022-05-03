@@ -31,18 +31,8 @@ namespace StarterBank.Controllers
 
                 string EncriptPasswordUser = EncriptPassword.Encripted(cartaoModel.Senha);
 
-                //Valida se o email já existe no banco de dados.
-                foreach (var item in cartaoData)
-                {
-                    if (item.Numero == cartaoModel.Numero)
-                    {
-                        Response.StatusCode = 401;
-                        return new ObjectResult("Este cartão já existe em nossa base de dados.");
-                    }
-                }
                 cartao.Numero = GeraNumeroCartao.Generate("1234");
                 cartao.Senha = cartaoModel.Senha;
-
 
                 database.Add(cartao);
                 database.SaveChanges();
@@ -51,7 +41,7 @@ namespace StarterBank.Controllers
             catch (Exception ex)
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
-                   $"Erro ao tentar registrar um novo usuário. Erro: {ex.Message}");
+                   $"Erro ao tentar registrar um novo usuário, verifique a conta vinculada ao cartão e tente novamente. Erro: {ex.Message}");
             }
         }
 
