@@ -1,3 +1,4 @@
+using System.Net;
 using System;
 using System.Linq;
 using Microsoft.AspNetCore.Http;
@@ -5,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using StarterBank.Data;
 using StarterBank.Helpers;
 using StarterBank.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace StarterBank.Controllers
 {
@@ -16,6 +18,42 @@ namespace StarterBank.Controllers
         public ClienteController(ApplicationDbContext database)
         {
             this.database = database;
+        }
+
+        [HttpGet]
+        public IActionResult Get()
+        {
+            try
+            {
+                var cliente = database.Clientes.Include(c => c.Conta).Include(c => c.Conta.Cartao).ToList();
+
+                if (cliente == null) { return NoContent(); }
+
+                return Ok(cliente);
+            }
+            catch (System.Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError,
+                  $"Erro ao tentar buscar clientes. Erro: {ex.Message}");
+            }
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetById(int id)
+        {
+            try
+            {
+                var cliente = database.Clientes.Include(c => c.Conta).Include(c => c.Conta.Cartao).First(i => i.Id == id);
+
+                if (cliente == null) { return NoContent(); }
+
+                return Ok(cliente);
+            }
+            catch (System.Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError,
+                  $"Erro ao tentar buscar cliente. Erro: {ex.Message}");
+            }
         }
 
         [HttpPost]
@@ -43,6 +81,56 @@ namespace StarterBank.Controllers
                    $"Erro ao tentar registrar um novo Cliente, verifique os dados e tente novamente. Erro: {ex.Message}");
             }
         }
+
+        [HttpPut("{id}")]
+        public IActionResult Put(int id, [FromBody] ClienteEditarDTO model)
+        {
+            try
+            {
+                var dadosCliente = database.Clientes.ToList();
+
+                Cliente cliente = new Cliente();
+
+                if (model == null) { return Ok(new { msg = "Nada for alterado" }); }
+
+                cliente.Nome = model.Nome;
+                cliente.Profissao = model.Profissao;
+
+                database.Update(cliente);
+                database.SaveChanges();
+                return Ok(new { msg = "Cliente atualizado com sucesso." });
+            }
+            catch (Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError,
+                   $"Erro ao tentar atualizar Cliente, verifique os dados e tente novamente. Erro: {ex.Message}");
+            }
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            try
+            {
+                var cliente = database.Clientes.Include(c => c.Conta).Include(c => c.Conta.Cartao).First(i => i.Id == id);
+                var conta = database.Contas.First(i => i.Id == cliente.Conta.Id);
+                var cartao = database.Cartoes.First(i => i.Id == cliente.Conta.Cartao.Id);
+                if (cliente == null) { return NoContent(); }
+
+                database.Remove(cliente);
+                database.Remove(conta);
+                database.Remove(cartao);
+                database.SaveChanges();
+
+                return Ok(new { msg = "Cliente deletado com sucesso." });
+            }
+            catch (System.Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError,
+                  $"Erro ao tentar deletar cliente. Erro: {ex.Message}");
+            }
+        }
+
 
     }
 }

@@ -1,3 +1,4 @@
+using System.Linq;
 using System;
 
 namespace StarterBank.Helpers
@@ -6,31 +7,22 @@ namespace StarterBank.Helpers
     {
         public static string Generate(int FaixaDoBanco)
         {
-            try
+            if (FaixaDoBanco > 9999) { return null; }
+
+            var characters = "123456789012";
+            var transformChar = characters.Replace(" ", "").ToUpper();
+
+            var Charsarr = new char[12];
+            var random = new Random();
+
+            for (int i = 0; i < Charsarr.Length; i++)
             {
-                if (FaixaDoBanco == 4)
-                {
-                    var characters = "123456789012";
-                    var transformChar = characters.Replace(" ", "").ToUpper();
-
-                    var Charsarr = new char[12];
-                    var random = new Random();
-
-                    for (int i = 0; i < Charsarr.Length; i++)
-                    {
-                        Charsarr[i] = transformChar[random.Next(transformChar.Length)];
-                    }
-
-                    var resultString = new String(Charsarr);
-                    resultString = FaixaDoBanco + resultString;
-                    return resultString;
-                }
-                return null;
+                Charsarr[i] = transformChar[random.Next(transformChar.Length)];
             }
-            catch (Exception)
-            {
-                return null;
-            }
+
+            var resultString = new String(Charsarr);
+            resultString = FaixaDoBanco + resultString;
+            return resultString;
 
         }
     }

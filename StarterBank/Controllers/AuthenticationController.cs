@@ -46,7 +46,8 @@ namespace StarterBank.Controllers
                     var credentialsForAccess = new SigningCredentials(symmectricKey, SecurityAlgorithms.HmacSha256Signature);
 
                     var claims = new List<Claim>();
-                    claims.Add(new Claim("numeroCartao", cartao.Numero.ToString()));
+                    claims.Add(new Claim("numero", cartao.Numero.ToString()));
+                    claims.Add(new Claim(ClaimTypes.Role, cartao.Role));
 
                     var JWT = new JwtSecurityToken(
                         issuer: "STARTERBANKAPI", // Quem está fornecendo o jwt para o usuário.

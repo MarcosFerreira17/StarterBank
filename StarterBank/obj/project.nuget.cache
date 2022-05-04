@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "xKsD2Kb7or0O9NE4mOCNgDgsUblMWlHWxpws8lmTCDobEdwxj0EgGPUci7Vj7zlrtjGTmiH70Jr0GeaX21KPzA==",
+  "dgSpecHash": "tNomMJBNj//aCX9e0LzDsdMGsduoiVOmjQqmfKHAzDwwkEYxx2L/qTMIyHVnqHDixyCVaY6ui24p6y+UzoX4Jg==",
   "success": true,
-  "projectFilePath": "c:\\dev\\Projeto_Starter\\Desafio_TDD\\API_StarterBank\\StarterBank\\StarterBank.csproj",
+  "projectFilePath": "C:\\dev\\Projeto_Starter\\Desafio_TDD\\API_StarterBank\\StarterBank\\StarterBank.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\mnia\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\mnia\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\5.0.16\\microsoft.aspnetcore.authentication.jwtbearer.5.0.16.nupkg.sha512",

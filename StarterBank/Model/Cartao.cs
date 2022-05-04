@@ -8,6 +8,9 @@ namespace StarterBank.Model
         public int Id { get; set; }
         public string Numero { get; set; }
         public string Senha { get; set; }
+        public string Role { get; set; }
+
+
 
     }
 }

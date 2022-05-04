@@ -9,6 +9,7 @@ using StarterBank.Data;
 using StarterBank.Helpers;
 using StarterBank.Model;
 using StarterBank.Model.DTO;
+using Microsoft.AspNetCore.Authorization;
 
 namespace StarterBank.Controllers
 {
@@ -23,7 +24,7 @@ namespace StarterBank.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetCaixas()
+        public IActionResult Get()
         {
             try
             {
@@ -38,7 +39,7 @@ namespace StarterBank.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetCaixaId(int id)
+        public IActionResult GetById(int id)
         {
             try
             {
@@ -53,7 +54,7 @@ namespace StarterBank.Controllers
         }
 
         [HttpPost]
-        public IActionResult NovoCaixa([FromBody] CaixaEletronicoDTO model)
+        public IActionResult PostNovoCaixa([FromBody] CaixaEletronicoDTO model)
         {
             try
             {
@@ -84,7 +85,7 @@ namespace StarterBank.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult AdicionaSaldo(int id, [FromBody] CaixaEletronicoDTO model)
+        public IActionResult PutDeposito(int id, [FromBody] CaixaEletronicoDTO model)
         {
             try
             {
@@ -113,7 +114,7 @@ namespace StarterBank.Controllers
         }
 
         [HttpPost("{id}")]
-        public IActionResult PostSaqueCaixa(int id, [FromForm] int valor)
+        public IActionResult PostByIdSaque(int id, [FromForm] int valor)
         {
             try
             {
@@ -147,7 +148,7 @@ namespace StarterBank.Controllers
         }
 
         [HttpDelete("{id}")]
-        public IActionResult DeletarCaixa(int id)
+        public IActionResult Delete(int id)
         {
 
             try
@@ -162,7 +163,7 @@ namespace StarterBank.Controllers
             catch (Exception ex)
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
-                  $"Erro ao tentar sacar no caixa. Erro: {ex.Message}");
+                  $"Erro ao deletar caixa eletronico. Erro: {ex.Message}");
             }
         }
 

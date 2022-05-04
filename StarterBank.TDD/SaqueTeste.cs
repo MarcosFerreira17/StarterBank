@@ -6,7 +6,6 @@ namespace StarterBank.TDD
 {
     public class SaqueTeste
     {
-
         private readonly Saque saque;
 
         [Theory]
@@ -40,6 +39,29 @@ namespace StarterBank.TDD
         {
             int valorDoSaque = 5;
             Assert.Throws<Exception>(() => Saque.Valor(valorDoSaque));//verifica se método lança exceção
+        }
+
+        [Theory(DisplayName = "Saque contém número de cedulas solicitado correto")]
+        [InlineData(3, 80)]
+        [InlineData(3, 300)]
+        [InlineData(5, 500)]
+        public void Saque_Contem_Numero_De_Cedulas_Correto(int quantidadeDeCedulas, int valorDoSaque)
+        {
+            var resultadoCedulas = Saque.Valor(valorDoSaque);
+            Assert.Equal(quantidadeDeCedulas, resultadoCedulas.Count);
+        }
+
+        [Fact(DisplayName = "Saque contem numero de cedulas igual ao predito")]
+        [Trait("Operacao", "Saque")]
+        public void Saque_Contem_Numero_De_Cedulas_Igual_Ao_Predito()
+        {
+            //Arrange
+            int quantidadeDeCedulas = 3;
+            int valorDoSaque = 80;
+            //Act
+            var resultadoCedulas = Saque.Valor(valorDoSaque);
+            //Assert
+            Assert.Equal(quantidadeDeCedulas, resultadoCedulas.Count);
         }
 
     }
