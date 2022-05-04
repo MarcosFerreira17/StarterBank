@@ -1,4 +1,3 @@
-using System.Linq;
 using System;
 
 namespace StarterBank.Helpers
@@ -7,8 +6,6 @@ namespace StarterBank.Helpers
     {
         public static string Generate(int FaixaDoBanco)
         {
-            if (FaixaDoBanco > 9999) { return null; }
-
             var characters = "123456789012";
             var transformChar = characters.Replace(" ", "").ToUpper();
 

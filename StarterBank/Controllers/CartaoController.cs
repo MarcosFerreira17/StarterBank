@@ -60,17 +60,17 @@ namespace StarterBank.Controllers
             {
                 var conta = database.Contas.First(i => i.Id == id);
 
+                if (conta == null) { return NoContent(); }
+
                 Cartao cartao = new Cartao();
 
-                string EncriptPasswordUser = EncriptPassword.Encripted(model.Senha);
-
                 cartao.Numero = GeraNumeroCartao.Generate(conta.Banco.Faixa);
-                cartao.Senha = EncriptPasswordUser;
+                cartao.Senha = EncriptPassword.Encripted(model.Senha);
                 cartao.Role = "user_comum";
 
                 database.Add(cartao);
                 database.SaveChanges();
-                return Ok(new { msg = "Usuário cadastrado com sucesso." });
+                return Ok(new { msg = "Cartão cadastrado com sucesso." });
             }
             catch (Exception ex)
             {
@@ -87,7 +87,7 @@ namespace StarterBank.Controllers
                 var cartao = database.Cartoes.First(i => i.Id == id);
                 EncriptPassword.Encripted(model.Senha);
                 cartao.Senha = EncriptPassword.Encripted(model.Senha);
-                return Ok();
+                return Ok(new { msg = "Senha alterada" });
 
             }
             catch (System.Exception ex)
