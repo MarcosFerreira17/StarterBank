@@ -358,3 +358,10 @@ c:\dev\Projeto_Starter\Desafio_TDD\API_StarterBank\StarterBank.TDD\obj\Debug\net
 c:\dev\Projeto_Starter\Desafio_TDD\API_StarterBank\StarterBank.TDD\obj\Debug\net5.0\ref\StarterBank.TDD.dll
 c:\dev\Projeto_Starter\Desafio_TDD\API_StarterBank\StarterBank.TDD\obj\Debug\net5.0\StarterBank.TDD.pdb
 c:\dev\Projeto_Starter\Desafio_TDD\API_StarterBank\StarterBank.TDD\obj\Debug\net5.0\StarterBank.TDD.genruntimeconfig.cache
+c:\dev\Projeto_Starter\Desafio_TDD\API_StarterBank\StarterBank.TDD\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+c:\dev\Projeto_Starter\Desafio_TDD\API_StarterBank\StarterBank.TDD\bin\Debug\net5.0\Microsoft.IdentityModel.JsonWebTokens.dll
+c:\dev\Projeto_Starter\Desafio_TDD\API_StarterBank\StarterBank.TDD\bin\Debug\net5.0\Microsoft.IdentityModel.Logging.dll
+c:\dev\Projeto_Starter\Desafio_TDD\API_StarterBank\StarterBank.TDD\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.dll
+c:\dev\Projeto_Starter\Desafio_TDD\API_StarterBank\StarterBank.TDD\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+c:\dev\Projeto_Starter\Desafio_TDD\API_StarterBank\StarterBank.TDD\bin\Debug\net5.0\Microsoft.IdentityModel.Tokens.dll
+c:\dev\Projeto_Starter\Desafio_TDD\API_StarterBank\StarterBank.TDD\bin\Debug\net5.0\System.IdentityModel.Tokens.Jwt.dll

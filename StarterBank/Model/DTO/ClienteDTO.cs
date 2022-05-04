@@ -1,10 +1,14 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace StarterBank.Model
 {
     public class ClienteDTO
     {
-        public int Id { get; set; }
+        [Required]
         public string Nome { get; set; }
+        [Required]
         public string Profissao { get; set; }
+        [Required]
         public string CPF { get; set; }
         public Conta Conta { get; set; }
 

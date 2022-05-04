@@ -1,11 +1,13 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace StarterBank.Model
 {
     public class CartaoDTO
     {
+        [Required]
         public string Numero { get; set; }
-        public float Saldo { get; set; }
+        [Required]
         public string Senha { get; set; }
-        public Conta Conta { get; set; }
 
     }
 }

@@ -30,7 +30,7 @@ namespace StarterBank.Controllers
 
                 string EncriptPasswordUser = EncriptPassword.Encripted(cartaoModel.Senha);
 
-                cartao.Numero = GeraNumeroCartao.Generate("1234");
+                cartao.Numero = GeraNumeroCartao.Generate(cartaoModel.Numero);
                 cartao.Senha = EncriptPasswordUser;
 
                 database.Add(cartao);

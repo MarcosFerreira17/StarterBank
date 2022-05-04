@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices.ComTypes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -5,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using StarterBank.Data;
+using StarterBank.Helpers;
 using StarterBank.Model;
 using StarterBank.Model.DTO;
 
@@ -31,7 +33,7 @@ namespace StarterBank.Controllers
             catch (Exception ex)
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
-                  $"Erro ao tentar depositar saldo no caixa. Erro: {ex.Message}");
+                  $"Erro ao tentar buscar lista de caixas caixa. Erro: {ex.Message}");
             }
         }
 
@@ -46,7 +48,7 @@ namespace StarterBank.Controllers
             catch (Exception ex)
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
-                  $"Erro ao tentar depositar saldo no caixa. Erro: {ex.Message}");
+                  $"Erro ao tentar encontrar caixa. Erro: {ex.Message}");
             }
         }
 
@@ -111,59 +113,36 @@ namespace StarterBank.Controllers
         }
 
         [HttpPost("{id}")]
-        public IActionResult Saque(int id, [FromBody] CaixaSaqueDTO model)
+        public IActionResult PostSaqueCaixa(int id, [FromForm] int valor)
         {
             try
             {
                 var caixa = database.CaixaEletronico.First(i => i.Id == id);
 
-                var cedulasSacadas = new List<int>();
-                int valorRestanteASerSacado = model.ValorSaque;
-
-                while (valorRestanteASerSacado >= Cedula.Cem)
+                if (ValidaSaque.Valor(valor) != true)
                 {
-                    cedulasSacadas.Add(Cedula.Cem);
-                    caixa.nota100 -= 1;
-                    caixa.Saldo -= Cedula.Cem;
-                    valorRestanteASerSacado = valorRestanteASerSacado - Cedula.Cem;
+                    throw new Exception("O caixa trabalha somente com as seguintes notas: R$ 10 R$20 R$50 R$100.");
                 }
 
-                while (valorRestanteASerSacado >= Cedula.Cinquenta)
+                var nota = Saque.Valor(valor);
+
+                for (var i = 0; i < nota.Count; i++)
                 {
-                    cedulasSacadas.Add(Cedula.Cinquenta);
-                    caixa.nota50 -= 1;
-                    caixa.Saldo -= Cedula.Cinquenta;
-                    valorRestanteASerSacado = valorRestanteASerSacado - Cedula.Cinquenta;
+                    if (nota[i] == Cedula.Cem) { caixa.nota100 -= 1; }
+                    if (nota[i] == Cedula.Cinquenta) { caixa.nota50 -= 1; }
+                    if (nota[i] == Cedula.Vinte) { caixa.nota20 -= 1; }
+                    if (nota[i] == Cedula.Dez) { caixa.nota10 -= 1; }
                 }
 
-                while (valorRestanteASerSacado >= Cedula.Vinte)
-                {
-                    cedulasSacadas.Add(Cedula.Vinte);
-                    caixa.nota20 -= 1;
-                    caixa.Saldo -= Cedula.Vinte;
-                    valorRestanteASerSacado = valorRestanteASerSacado - Cedula.Vinte;
-                }
-
-                while (valorRestanteASerSacado >= Cedula.Dez)
-                {
-                    cedulasSacadas.Add(Cedula.Dez);
-                    caixa.nota10 -= 1;
-                    caixa.Saldo -= Cedula.Dez;
-                    valorRestanteASerSacado = valorRestanteASerSacado - Cedula.Dez;
-                }
-                if (cedulasSacadas.Count == 0)
-                    throw new Exception("Não há cedulas disponíveis para o valor solicitado.");
-
-                caixa.ValorSaque += model.ValorSaque; //Valor sacado total
+                caixa.ValorSaque += valor; //Valor sacado total
+                caixa.Saldo -= valor;
                 database.Update(caixa);
                 database.SaveChanges();
-                return Ok(cedulasSacadas);
-
+                return Ok(new { msg = "Valor sacado com sucesso." });
             }
             catch (Exception ex)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError,
-                  $"Erro ao tentar sacar no caixa. Erro: {ex.Message}");
+                return BadRequest(ex.Message);
             }
         }
 
@@ -185,15 +164,6 @@ namespace StarterBank.Controllers
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
                   $"Erro ao tentar sacar no caixa. Erro: {ex.Message}");
             }
-        }
-
-        //Guarda o valor da cedula
-        public static class Cedula
-        {
-            public static int Cem => 100;
-            public static int Cinquenta => 50;
-            public static int Vinte => 20;
-            public static int Dez => 10;
         }
 
     }
