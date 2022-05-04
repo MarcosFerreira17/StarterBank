@@ -21,7 +21,7 @@ namespace StarterBank.Controllers
         }
 
         [HttpGet]
-        [Authorize]
+        //   [Authorize]
         public IActionResult Get()
         {
             try
@@ -37,7 +37,7 @@ namespace StarterBank.Controllers
         }
 
         [HttpGet("{id}")]
-        [Authorize("admin")]
+        //     [Authorize("admin")]
         public IActionResult GetById(int id)
         {
             try
@@ -53,19 +53,18 @@ namespace StarterBank.Controllers
         }
 
         [HttpPost("{id}")]
-        [Authorize("admin")]
-        public IActionResult Post(int id, [FromBody] CartaoRegistroDTO cartaoModel)
+        //  [Authorize("admin")]
+        public IActionResult Post(int id, [FromBody] CartaoRegistroDTO model)
         {
             try
             {
-                var cartaoData = database.Cartoes.ToList();
                 var conta = database.Contas.First(i => i.Id == id);
 
                 Cartao cartao = new Cartao();
 
-                string EncriptPasswordUser = EncriptPassword.Encripted(cartaoModel.Senha);
+                string EncriptPasswordUser = EncriptPassword.Encripted(model.Senha);
 
-                cartao.Numero = GeraNumeroCartao.Generate(conta.FaixaDoBanco);
+                cartao.Numero = GeraNumeroCartao.Generate(conta.Banco.Faixa);
                 cartao.Senha = EncriptPasswordUser;
                 cartao.Role = "user_comum";
 

@@ -26,7 +26,7 @@ namespace StarterBank.Controllers
 
             try
             {
-                var contas = database.Contas.Include(c => c.Cartao).Include(c => c.Caixa).ToList();
+                var contas = database.Contas.ToList();
 
                 if (contas == null) { return NoContent(); }
 
@@ -47,7 +47,7 @@ namespace StarterBank.Controllers
 
             try
             {
-                var conta = database.Contas.Include(c => c.Cartao).Include(c => c.Caixa).First(i => i.Id == id);
+                var conta = database.Contas.First(i => i.Id == id);
 
                 if (conta == null) { return NoContent(); }
 
@@ -70,11 +70,11 @@ namespace StarterBank.Controllers
                 var dadosCliente = database.Clientes.ToList();
                 Conta conta = new Conta();
 
-                conta.NumeroAgencia = model.Agencia;
-                conta.NomeBanco = model.NomeBanco;
-                conta.NumeroConta = model.Numero;
+                // conta.NumeroAgencia = model.Agencia;
+                // conta.NomeBanco = model.NomeBanco;
+                // conta.NumeroConta = model.Numero;
                 conta.Saldo = model.Saldo;
-                conta.Cartao.Id = model.CartaoId;
+                conta.CartaoId = model.CartaoId;
 
                 database.Add(conta);
                 database.SaveChanges();
@@ -96,11 +96,11 @@ namespace StarterBank.Controllers
                 var dadosCliente = database.Clientes.ToList();
                 Conta conta = new Conta();
 
-                conta.NumeroAgencia = model.Agencia;
-                conta.NomeBanco = model.NomeBanco;
-                conta.NumeroConta = model.Numero;
+                // conta.NumeroAgencia = model.Agencia;
+                // conta.NomeBanco = model.NomeBanco;
+                // conta.NumeroConta = model.Numero;
                 conta.Saldo = model.Saldo;
-                conta.Cartao.Id = model.CartaoId;
+                conta.CartaoId = model.CartaoId;
 
                 database.Add(conta);
                 database.SaveChanges();
@@ -119,13 +119,10 @@ namespace StarterBank.Controllers
         {
             try
             {
-                var conta = database.Contas.Include(c => c.Cartao).Include(c => c.Caixa).First(i => i.Id == id);
-                var cartao = database.Cartoes.First(i => i.Id == conta.Cartao.Id);
-
+                var conta = database.Contas.First(i => i.Id == id);
                 if (conta == null) { return NoContent(); }
 
                 database.Remove(conta);
-                database.Remove(cartao);
                 database.SaveChanges();
                 return Ok(conta);
 

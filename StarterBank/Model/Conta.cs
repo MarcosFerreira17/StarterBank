@@ -6,12 +6,10 @@ namespace StarterBank.Model
     {
         [Key]
         public int Id { get; set; }
-        public string NomeBanco { get; set; }
-        public int FaixaDoBanco { get; set; }
-        public string NumeroConta { get; set; }
-        public int NumeroAgencia { get; set; }
+        public Banco Banco { get; set; }
+        public int NumeroConta { get; set; }
         public float Saldo { get; set; }
-        public Cartao Cartao { get; set; }
-        public CaixaEletronico Caixa { get; set; }
+        public int CartaoId { get; set; }
+        public int CaixaEletronicoId { get; set; }
     }
 }

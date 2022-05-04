@@ -9,6 +9,7 @@ namespace StarterBank.Model
         public string Nome { get; set; }
         public string Profissao { get; set; }
         public string CPF { get; set; }
-        public Conta Conta { get; set; }
+        public int ContaId { get; set; }
+
     }
 }

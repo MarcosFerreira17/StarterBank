@@ -25,7 +25,7 @@ namespace StarterBank.Controllers
         {
             try
             {
-                var cliente = database.Clientes.Include(c => c.Conta).Include(c => c.Conta.Cartao).ToList();
+                var cliente = database.Clientes.ToList();
 
                 if (cliente == null) { return NoContent(); }
 
@@ -43,7 +43,7 @@ namespace StarterBank.Controllers
         {
             try
             {
-                var cliente = database.Clientes.Include(c => c.Conta).Include(c => c.Conta.Cartao).First(i => i.Id == id);
+                var cliente = database.Clientes.First(i => i.Id == id);
 
                 if (cliente == null) { return NoContent(); }
 
@@ -57,7 +57,7 @@ namespace StarterBank.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] ClienteRegistroDTO model)
+        public IActionResult Post([FromBody] ClienteDTO model)
         {
             try
             {
@@ -69,7 +69,7 @@ namespace StarterBank.Controllers
                 cliente.Nome = model.Nome;
                 cliente.Profissao = model.Profissao;
                 cliente.CPF = model.CPF;
-                cliente.Conta.Id = model.ContaId;
+                cliente.ContaId = model.ContaId;
 
                 database.Add(cliente);
                 database.SaveChanges();
@@ -112,14 +112,12 @@ namespace StarterBank.Controllers
         {
             try
             {
-                var cliente = database.Clientes.Include(c => c.Conta).Include(c => c.Conta.Cartao).First(i => i.Id == id);
-                var conta = database.Contas.First(i => i.Id == cliente.Conta.Id);
-                var cartao = database.Cartoes.First(i => i.Id == cliente.Conta.Cartao.Id);
+                var cliente = database.Clientes.First(i => i.Id == id);
+
                 if (cliente == null) { return NoContent(); }
 
                 database.Remove(cliente);
-                database.Remove(conta);
-                database.Remove(cartao);
+
                 database.SaveChanges();
 
                 return Ok(new { msg = "Cliente deletado com sucesso." });

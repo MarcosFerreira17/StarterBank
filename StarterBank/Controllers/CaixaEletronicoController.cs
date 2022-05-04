@@ -28,7 +28,7 @@ namespace StarterBank.Controllers
         {
             try
             {
-                var caixa = database.CaixaEletronico.ToList();
+                var caixa = database.CaixaEletronico.Include(b => b.Banco).ToList();
                 return Ok(caixa);
             }
             catch (Exception ex)
@@ -43,7 +43,7 @@ namespace StarterBank.Controllers
         {
             try
             {
-                var caixa = database.CaixaEletronico.First(i => i.Id == id);
+                var caixa = database.CaixaEletronico.Include(b => b.Banco).First(i => i.Id == id);
                 return Ok(caixa);
             }
             catch (Exception ex)
@@ -66,8 +66,7 @@ namespace StarterBank.Controllers
                 caixa.nota20 = model.nota20;
                 caixa.nota50 = model.nota50;
                 caixa.nota100 = model.nota100;
-                caixa.Banco = model.Banco;
-                caixa.FaixaDoBanco = model.FaixaDoBanco;
+                caixa.Banco.Id = model.BancoId;
                 caixa.Saldo += model.nota10 * Cedula.Dez + model.nota20 * Cedula.Vinte + model.nota50 * Cedula.Cinquenta + model.nota100 * Cedula.Cem;
 
                 if (caixa.Saldo <= 0) return NoContent();
@@ -97,8 +96,7 @@ namespace StarterBank.Controllers
                 caixa.nota20 += model.nota20;
                 caixa.nota50 += model.nota50;
                 caixa.nota100 += model.nota100;
-                caixa.Banco = model.Banco;
-                caixa.FaixaDoBanco = model.FaixaDoBanco;
+                caixa.Banco.Id = model.BancoId;
                 caixa.Saldo += model.nota10 * Cedula.Dez + model.nota20 * Cedula.Vinte + model.nota50 * Cedula.Cinquenta + model.nota100 * Cedula.Cem;
 
                 database.Update(caixa);
@@ -154,10 +152,9 @@ namespace StarterBank.Controllers
             try
             {
                 var caixa = database.CaixaEletronico.First(i => i.Id == id);
-
                 database.Remove(caixa);
                 database.SaveChanges();
-                return Ok(caixa + " Deletado com sucesso.");
+                return Ok("Caixa Eletronico deletado com sucesso.");
 
             }
             catch (Exception ex)
