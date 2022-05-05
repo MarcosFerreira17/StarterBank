@@ -29,7 +29,7 @@ namespace StarterBank.Controllers
         {
             try
             {
-                var caixa = database.CaixaEletronico.Include(b => b.Banco).ToList();
+                var caixa = database.CaixaEletronico.ToList();
                 return Ok(caixa);
             }
             catch (Exception ex)
@@ -44,7 +44,7 @@ namespace StarterBank.Controllers
         {
             try
             {
-                var caixa = database.CaixaEletronico.Include(b => b.Banco).First(i => i.Id == id);
+                var caixa = database.CaixaEletronico.First(i => i.Id == id);
                 return Ok(caixa);
             }
             catch (Exception ex)
@@ -67,7 +67,7 @@ namespace StarterBank.Controllers
                 caixa.nota20 = model.nota20;
                 caixa.nota50 = model.nota50;
                 caixa.nota100 = model.nota100;
-                caixa.Banco.Id = model.BancoId;
+                caixa.BancoId = model.BancoId;
                 caixa.Saldo += model.nota10 * Cedula.Dez + model.nota20 * Cedula.Vinte + model.nota50 * Cedula.Cinquenta + model.nota100 * Cedula.Cem;
 
                 if (caixa.Saldo <= 0) return NoContent();
@@ -135,23 +135,35 @@ namespace StarterBank.Controllers
                         {
                             if (caixa.nota100 > 0)
                             {
-                                caixa.nota100 -= 1;
-                                somaNotasSacadas -= Cedula.Cem;
+                                if (somaNotasSacadas >= 100)
+                                {
+                                    caixa.nota100 -= 1;
+                                    somaNotasSacadas -= Cedula.Cem;
+                                }
                             }
                             if (caixa.nota50 > 0 || caixa.nota100 == 0)
                             {
-                                caixa.nota50 -= 1;
-                                somaNotasSacadas -= Cedula.Cinquenta;
+                                if (somaNotasSacadas >= 50)
+                                {
+                                    caixa.nota50 -= 1;
+                                    somaNotasSacadas -= Cedula.Cinquenta;
+                                }
                             }
                             if (caixa.nota20 > 0 || caixa.nota50 == 0)
                             {
-                                caixa.nota20 -= 1;
-                                somaNotasSacadas -= Cedula.Vinte;
+                                if (somaNotasSacadas >= 20)
+                                {
+                                    caixa.nota20 -= 1;
+                                    somaNotasSacadas -= Cedula.Vinte;
+                                }
                             }
                             if (caixa.nota10 > 0 || caixa.nota20 == 0)
                             {
-                                caixa.nota10 -= 1;
-                                somaNotasSacadas -= Cedula.Dez;
+                                if (somaNotasSacadas >= 10)
+                                {
+                                    caixa.nota10 -= 1;
+                                    somaNotasSacadas -= Cedula.Dez;
+                                }
                             }
                         }
                     }

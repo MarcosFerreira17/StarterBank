@@ -5,7 +5,6 @@ namespace StarterBank.Model
     public class CaixaEletronico
     {
         public int Id { get; set; }
-        public Banco Banco { get; set; }
         public int BancoId { get; set; }
         public int nota100 { get; set; }
         public int nota50 { get; set; }

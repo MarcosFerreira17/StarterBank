@@ -8,6 +8,8 @@ namespace StarterBank.Model
         public string Nome { get; set; }
         public int Faixa { get; set; }
         public int NumeroAgencia { get; set; }
+        public List<CaixaEletronico> CaixasEletronicos { get; set; }
+        public int CaixasEletronicosId { get; set; }
         public List<Conta> Contas { get; set; }
 
     }
