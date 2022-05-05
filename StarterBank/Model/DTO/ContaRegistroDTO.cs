@@ -5,15 +5,11 @@ namespace StarterBank.Model
     public class ContaRegistroDTO
     {
         [Required]
-        public string NomeBanco { get; set; }
+        public int BancoId { get; set; }
         [Required]
-        public string Numero { get; set; }
+        public float SaldoInicial { get; set; }
         [Required]
-        public int Agencia { get; set; }
-        [Required]
-        public float Saldo { get; set; }
-        [Required]
-        public int CartaoId { get; set; }
-        public int CaixaId { get; set; }
+        public int ClienteId { get; set; }
+
     }
 }

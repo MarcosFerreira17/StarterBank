@@ -18,9 +18,9 @@ namespace StarterBank.Helpers
                 }
                 return sb.ToString(); // Retorna senha criptografada 
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return null; // Caso encontre erro retorna nulo
+                return e.Message; // Caso encontre erro retorna nulo
             }
         }
     }

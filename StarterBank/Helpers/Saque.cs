@@ -38,5 +38,16 @@ namespace StarterBank.Helpers
 
             return cedulasSacadas;
         }
+
+        public static int SomaNotas(List<int> Valor)
+        {
+
+            int soma = 0;
+            for (var i = 0; i < Valor.Count; i++)
+            {
+                soma += Valor[i];
+            }
+            return soma;
+        }
     }
 }

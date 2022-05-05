@@ -9,8 +9,8 @@ using StarterBank.Data;
 namespace StarterBank.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220505135102_updateBanco")]
-    partial class updateBanco
+    [Migration("20220505172337_UpdateContaCaixaId")]
+    partial class UpdateContaCaixaId
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -131,10 +131,10 @@ namespace StarterBank.Migrations
                     b.Property<int>("BancoId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CaixaEletronicoId")
+                    b.Property<int>("CartaoId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CartaoId")
+                    b.Property<int>("ClienteId")
                         .HasColumnType("int");
 
                     b.Property<int>("NumeroConta")

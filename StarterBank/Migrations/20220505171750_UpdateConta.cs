@@ -2,13 +2,13 @@
 
 namespace StarterBank.Migrations
 {
-    public partial class updateConta : Migration
+    public partial class UpdateConta : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<int>(
-                name: "BancoId",
-                table: "Cartoes",
+                name: "ClienteId",
+                table: "Contas",
                 type: "int",
                 nullable: false,
                 defaultValue: 0);
@@ -17,8 +17,8 @@ namespace StarterBank.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "BancoId",
-                table: "Cartoes");
+                name: "ClienteId",
+                table: "Contas");
         }
     }
 }

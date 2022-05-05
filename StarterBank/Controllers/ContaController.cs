@@ -70,11 +70,10 @@ namespace StarterBank.Controllers
                 var dadosCliente = database.Clientes.ToList();
                 Conta conta = new Conta();
 
-                // conta.NumeroAgencia = model.Agencia;
-                // conta.NomeBanco = model.NomeBanco;
-                // conta.NumeroConta = model.Numero;
-                conta.Saldo = model.Saldo;
-                conta.CartaoId = model.CartaoId;
+                conta.BancoId = model.BancoId;
+                conta.ClienteId = model.ClienteId;
+                conta.NumeroConta = 1234;
+                conta.Saldo = model.SaldoInicial;
 
                 database.Add(conta);
                 database.SaveChanges();
@@ -89,18 +88,17 @@ namespace StarterBank.Controllers
 
         [HttpPut("{id}")]
         [Authorize(Roles = "admin")]
-        public IActionResult Put([FromBody] ContaRegistroDTO model)
+        public IActionResult PutSaque([FromBody] ContaRegistroDTO model)
         {
             try
             {
                 var dadosCliente = database.Clientes.ToList();
                 Conta conta = new Conta();
 
-                // conta.NumeroAgencia = model.Agencia;
-                // conta.NomeBanco = model.NomeBanco;
-                // conta.NumeroConta = model.Numero;
-                conta.Saldo = model.Saldo;
-                conta.CartaoId = model.CartaoId;
+                conta.BancoId = model.BancoId;
+                conta.ClienteId = model.ClienteId;
+                conta.NumeroConta = 1234;
+                conta.Saldo = model.SaldoInicial;
 
                 database.Add(conta);
                 database.SaveChanges();
@@ -124,7 +122,7 @@ namespace StarterBank.Controllers
 
                 database.Remove(conta);
                 database.SaveChanges();
-                return Ok(conta);
+                return Ok(new { msg = "Conta deletada com sucecesso." });
 
             }
             catch (System.Exception ex)
@@ -134,13 +132,6 @@ namespace StarterBank.Controllers
 
             }
         }
-
-        // [HttpPost("{id}")]
-        // public IActionResult Saque([FromBody] ContaDTO model)
-        // {
-
-        // }
-
 
     }
 }

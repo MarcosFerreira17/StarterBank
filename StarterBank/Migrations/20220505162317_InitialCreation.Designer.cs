@@ -9,8 +9,8 @@ using StarterBank.Data;
 namespace StarterBank.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220505133920_updateConta")]
-    partial class updateConta
+    [Migration("20220505162317_InitialCreation")]
+    partial class InitialCreation
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -128,7 +128,7 @@ namespace StarterBank.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int?>("BancoId")
+                    b.Property<int>("BancoId")
                         .HasColumnType("int");
 
                     b.Property<int>("CaixaEletronicoId")
@@ -163,11 +163,16 @@ namespace StarterBank.Migrations
 
             modelBuilder.Entity("StarterBank.Model.Conta", b =>
                 {
-                    b.HasOne("StarterBank.Model.Banco", "Banco")
-                        .WithMany()
-                        .HasForeignKey("BancoId");
+                    b.HasOne("StarterBank.Model.Banco", null)
+                        .WithMany("Contas")
+                        .HasForeignKey("BancoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
 
-                    b.Navigation("Banco");
+            modelBuilder.Entity("StarterBank.Model.Banco", b =>
+                {
+                    b.Navigation("Contas");
                 });
 #pragma warning restore 612, 618
         }

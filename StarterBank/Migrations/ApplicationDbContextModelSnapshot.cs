@@ -129,10 +129,10 @@ namespace StarterBank.Migrations
                     b.Property<int>("BancoId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CaixaEletronicoId")
+                    b.Property<int>("CartaoId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CartaoId")
+                    b.Property<int>("ClienteId")
                         .HasColumnType("int");
 
                     b.Property<int>("NumeroConta")

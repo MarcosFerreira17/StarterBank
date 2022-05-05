@@ -85,8 +85,9 @@ namespace StarterBank.Controllers
             try
             {
                 var cartao = database.Cartoes.First(i => i.Id == id);
-                EncriptPassword.Encripted(model.Senha);
                 cartao.Senha = EncriptPassword.Encripted(model.Senha);
+                database.Update(cartao);
+                database.SaveChanges();
                 return Ok(new { msg = "Senha alterada" });
             }
             catch (System.Exception ex)

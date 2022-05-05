@@ -87,9 +87,7 @@ namespace StarterBank.Controllers
         {
             try
             {
-                var dadosCliente = database.Clientes.ToList();
-
-                Cliente cliente = new Cliente();
+                var cliente = database.Clientes.First(i => i.Id == id);
 
                 if (model == null) { return Ok(new { msg = "Nada for alterado" }); }
 

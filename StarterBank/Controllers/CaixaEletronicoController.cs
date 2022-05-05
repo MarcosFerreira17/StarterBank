@@ -15,7 +15,7 @@ namespace StarterBank.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]
-    [Authorize(Roles = "admin")]
+    // [Authorize(Roles = "admin")]
     public class CaixaEletronicoController : ControllerBase
     {
         private readonly ApplicationDbContext database;
@@ -97,13 +97,13 @@ namespace StarterBank.Controllers
                 caixa.nota20 += model.nota20;
                 caixa.nota50 += model.nota50;
                 caixa.nota100 += model.nota100;
-                caixa.Banco.Id = model.BancoId;
+                caixa.BancoId = caixa.BancoId;
                 caixa.Saldo += model.nota10 * Cedula.Dez + model.nota20 * Cedula.Vinte + model.nota50 * Cedula.Cinquenta + model.nota100 * Cedula.Cem;
 
                 database.Update(caixa);
                 database.SaveChanges();
 
-                return Ok(caixa.Saldo);
+                return Ok(new { msg = "Saldo: " + caixa.Saldo.ToString("f2") });
             }
             catch (Exception ex)
             {
@@ -125,17 +125,45 @@ namespace StarterBank.Controllers
                 }
 
                 var nota = Saque.Valor(valor);
+                var somaNotasSacadas = Saque.SomaNotas(Saque.Valor(valor));
 
-                for (var i = 0; i < nota.Count; i++)
+                if (caixa.Saldo >= valor)
                 {
-                    if (nota[i] == Cedula.Cem) { caixa.nota100 -= 1; }
-                    if (nota[i] == Cedula.Cinquenta) { caixa.nota50 -= 1; }
-                    if (nota[i] == Cedula.Vinte) { caixa.nota20 -= 1; }
-                    if (nota[i] == Cedula.Dez) { caixa.nota10 -= 1; }
+                    for (var i = 0; i < nota.Count; i++)
+                    {
+                        if (somaNotasSacadas > 0)
+                        {
+                            if (caixa.nota100 > 0)
+                            {
+                                caixa.nota100 -= 1;
+                                somaNotasSacadas -= Cedula.Cem;
+                            }
+                            if (caixa.nota50 > 0 || caixa.nota100 == 0)
+                            {
+                                caixa.nota50 -= 1;
+                                somaNotasSacadas -= Cedula.Cinquenta;
+                            }
+                            if (caixa.nota20 > 0 || caixa.nota50 == 0)
+                            {
+                                caixa.nota20 -= 1;
+                                somaNotasSacadas -= Cedula.Vinte;
+                            }
+                            if (caixa.nota10 > 0 || caixa.nota20 == 0)
+                            {
+                                caixa.nota10 -= 1;
+                                somaNotasSacadas -= Cedula.Dez;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    throw new Exception("Valor solicitado para saque maior que o disponivel no caixa, tente um valor menor.");
                 }
 
                 caixa.ValorSaque += valor; //Valor sacado total
                 caixa.Saldo -= valor;
+
                 database.Update(caixa);
                 database.SaveChanges();
                 return Ok(new { msg = "Valor sacado com sucesso." });
