@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace StarterBank.Model
 {
     public class Banco
@@ -6,6 +8,7 @@ namespace StarterBank.Model
         public string Nome { get; set; }
         public int Faixa { get; set; }
         public int NumeroAgencia { get; set; }
+        public List<Conta> Contas { get; set; }
 
     }
 }

@@ -130,14 +130,14 @@ namespace StarterBank.Migrations
 
 
             migrationBuilder.Sql("INSERT INTO Bancos(Id, Nome, Faixa, NumeroAgencia) VALUES('1','Santander','1234','2434')");
-            migrationBuilder.Sql("INSERT INTO Bancos(Id, Nome, Faixa, NumeroAgencia) VALUES('2','Bradesco','4321','54254')");
+            migrationBuilder.Sql("INSERT INTO Bancos(Id, Nome, Faixa, NumeroAgencia) VALUES('2','Bradesco','4321','5425')");
             migrationBuilder.Sql("INSERT INTO Bancos(Id, Nome, Faixa, NumeroAgencia) VALUES('3','Mercantil','1244','2342')");
             migrationBuilder.Sql("INSERT INTO Bancos(Id, Nome, Faixa, NumeroAgencia) VALUES('4','Inter','5634','2423')");
 
             migrationBuilder.Sql("INSERT INTO CaixaEletronico(Id, BancoId, nota100, nota50, nota20, nota10, Saldo, ValorSaque, Data) VALUES('1', '1', '100','100','100','100','1800', '0', '2022-05-03 13:51:00.666368')");
             migrationBuilder.Sql("INSERT INTO CaixaEletronico(Id, BancoId, nota100, nota50, nota20, nota10, Saldo, ValorSaque, Data) VALUES('2', '2', '100','100','100','100','1800', '0', '2022-05-03 13:51:00.666368')");
             migrationBuilder.Sql("INSERT INTO CaixaEletronico(Id, BancoId, nota100, nota50, nota20, nota10, Saldo, ValorSaque, Data) VALUES('3', '3', '100','100','100','100','1800', '0', '2022-05-03 13:51:00.666368')");
-            migrationBuilder.Sql("INSERT INTO CaixaEletronico(Id, BancoId, nota100, nota50, nota20, nota10, Saldo, ValorSaque, Data) VALUES('4', '4', '100','100','100','100','1800', '0', '2022-05-03 13:51:00.666368')");
+            migrationBuilder.Sql("INSERT INTO CaixaEletronico(Id, BancoId, nota100, nota50, nota20, nota10, Saldo, ValorSaque, Data) VALUES('4', '4', '5','5','5','10','900', '0', '2022-05-03 13:51:00.666368')");
 
             migrationBuilder.Sql("INSERT INTO Clientes(Id, Nome, Profissao, CPF, ContaId) VALUES('1','Marcos Ferreira','Dev','46680074700', '1')");
             migrationBuilder.Sql("INSERT INTO Clientes(Id, Nome, Profissao, CPF, ContaId) VALUES('2','João Ferreira','Dev','46680074700', '2')");
@@ -149,10 +149,10 @@ namespace StarterBank.Migrations
             migrationBuilder.Sql("INSERT INTO Contas(Id, BancoId, NumeroConta, Saldo, CartaoId, CaixaEletronicoId) VALUES('3','3','5533','100', '3', '3')");
             migrationBuilder.Sql("INSERT INTO Contas(Id, BancoId, NumeroConta, Saldo, CartaoId, CaixaEletronicoId) VALUES('4','4','6544','100', '4', '4')");
 
-            migrationBuilder.Sql("INSERT INTO Cartoes(Id, Numero, Senha, Role) VALUES('1', '1234444444444444444', 'B45CFFE084DD3D20D928BEE85E7B0F21', 'admin')");
-            migrationBuilder.Sql("INSERT INTO Cartoes(Id, Numero, Senha, Role) VALUES('2', '4321444444444444444', 'B45CFFE084DD3D20D928BEE85E7B0F21', 'user_comum')");
-            migrationBuilder.Sql("INSERT INTO Cartoes(Id, Numero, Senha, Role) VALUES('3', '1244444444444444444', 'B45CFFE084DD3D20D928BEE85E7B0F21', 'user_comum')");
-            migrationBuilder.Sql("INSERT INTO Cartoes(Id, Numero, Senha, Role) VALUES('4', '5634444444444444444', 'B45CFFE084DD3D20D928BEE85E7B0F21', 'user_comum')");
+            migrationBuilder.Sql("INSERT INTO Cartoes(Id, Numero, Senha, Role) VALUES('1', '1234444444444444', 'B45CFFE084DD3D20D928BEE85E7B0F21', 'admin')");
+            migrationBuilder.Sql("INSERT INTO Cartoes(Id, Numero, Senha, Role) VALUES('2', '4321444444444444', 'B45CFFE084DD3D20D928BEE85E7B0F21', 'user_comum')");
+            migrationBuilder.Sql("INSERT INTO Cartoes(Id, Numero, Senha, Role) VALUES('3', '1244444444444444', 'B45CFFE084DD3D20D928BEE85E7B0F21', 'user_comum')");
+            migrationBuilder.Sql("INSERT INTO Cartoes(Id, Numero, Senha, Role) VALUES('4', '5634444444444444', 'B45CFFE084DD3D20D928BEE85E7B0F21', 'user_comum')");
 
 
         }

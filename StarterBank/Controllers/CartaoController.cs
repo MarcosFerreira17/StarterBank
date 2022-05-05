@@ -1,12 +1,11 @@
-using System.Net;
 using System;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using StarterBank.Data;
 using StarterBank.Helpers;
 using StarterBank.Model;
-using Microsoft.AspNetCore.Authorization;
 
 namespace StarterBank.Controllers
 {
@@ -21,7 +20,7 @@ namespace StarterBank.Controllers
         }
 
         [HttpGet]
-        //   [Authorize]
+        //        [Authorize(Roles = "user_comum")]
         public IActionResult Get()
         {
             try
@@ -37,7 +36,7 @@ namespace StarterBank.Controllers
         }
 
         [HttpGet("{id}")]
-        //     [Authorize("admin")]
+        //[Authorize("admin")]
         public IActionResult GetById(int id)
         {
             try
@@ -53,18 +52,19 @@ namespace StarterBank.Controllers
         }
 
         [HttpPost("{id}")]
-        //  [Authorize("admin")]
+        //[Authorize("admin")]
         public IActionResult Post(int id, [FromBody] CartaoRegistroDTO model)
         {
             try
             {
                 var conta = database.Contas.First(i => i.Id == id);
+                var banco = database.Bancos.First(i => i.Id == conta.BancoId);
 
                 if (conta == null) { return NoContent(); }
 
                 Cartao cartao = new Cartao();
-
-                cartao.Numero = GeraNumeroCartao.Generate(conta.Banco.Faixa);
+                cartao.BancoId = conta.BancoId;
+                cartao.Numero = GeraNumeroCartao.Faixa(banco.Faixa);
                 cartao.Senha = EncriptPassword.Encripted(model.Senha);
                 cartao.Role = "user_comum";
 
@@ -88,7 +88,6 @@ namespace StarterBank.Controllers
                 EncriptPassword.Encripted(model.Senha);
                 cartao.Senha = EncriptPassword.Encripted(model.Senha);
                 return Ok(new { msg = "Senha alterada" });
-
             }
             catch (System.Exception ex)
             {
@@ -100,15 +99,13 @@ namespace StarterBank.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-
             try
             {
                 var cartao = database.Cartoes.First(i => i.Id == id);
 
                 database.Remove(cartao);
                 database.SaveChanges();
-                return Ok(cartao + " Deletado com sucesso.");
-
+                return Ok("Deletado com sucesso.");
             }
             catch (Exception ex)
             {

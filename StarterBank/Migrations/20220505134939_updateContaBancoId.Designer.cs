@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StarterBank.Data;
 
 namespace StarterBank.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220505134939_updateContaBancoId")]
+    partial class updateContaBancoId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -143,8 +145,6 @@ namespace StarterBank.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BancoId");
-
                     b.ToTable("Contas");
                 });
 
@@ -157,20 +157,6 @@ namespace StarterBank.Migrations
                         .IsRequired();
 
                     b.Navigation("Banco");
-                });
-
-            modelBuilder.Entity("StarterBank.Model.Conta", b =>
-                {
-                    b.HasOne("StarterBank.Model.Banco", null)
-                        .WithMany("Contas")
-                        .HasForeignKey("BancoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("StarterBank.Model.Banco", b =>
-                {
-                    b.Navigation("Contas");
                 });
 #pragma warning restore 612, 618
         }

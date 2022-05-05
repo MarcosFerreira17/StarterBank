@@ -26,11 +26,7 @@ namespace StarterBank.Controllers
         [HttpPost]
         public IActionResult Acesso([FromBody] CartaoLoginDTO credentials)
         {
-            // Busca um usuário por e-mail
-            // Verifica se a senha está correta
-            // Gerar um token jwt e retornar este token para o usuário
             string EncriptPasswordUser = EncriptPassword.Encripted(credentials.Senha);
-
             try
             {
                 Cartao cartao = database.Cartoes.First(u => u.Numero.Equals(credentials.Numero));

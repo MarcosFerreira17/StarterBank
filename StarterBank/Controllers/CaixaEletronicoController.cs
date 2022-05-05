@@ -15,6 +15,7 @@ namespace StarterBank.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]
+    [Authorize(Roles = "admin")]
     public class CaixaEletronicoController : ControllerBase
     {
         private readonly ApplicationDbContext database;

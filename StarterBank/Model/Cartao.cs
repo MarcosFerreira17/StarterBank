@@ -9,6 +9,6 @@ namespace StarterBank.Model
         public string Numero { get; set; }
         public string Senha { get; set; }
         public string Role { get; set; }
-
+        public int BancoId { get; set; }
     }
 }

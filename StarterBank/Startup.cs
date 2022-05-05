@@ -84,12 +84,14 @@ namespace StarterBank
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "mniaAPI v1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "StarterBank v1");
             });
 
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
