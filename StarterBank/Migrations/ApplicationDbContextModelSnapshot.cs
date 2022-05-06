@@ -32,8 +32,8 @@ namespace StarterBank.Migrations
                     b.Property<string>("Nome")
                         .HasColumnType("longtext");
 
-                    b.Property<int>("NumeroAgencia")
-                        .HasColumnType("int");
+                    b.Property<string>("NumeroAgencia")
+                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
@@ -138,8 +138,8 @@ namespace StarterBank.Migrations
                     b.Property<int>("ClienteId")
                         .HasColumnType("int");
 
-                    b.Property<int>("NumeroConta")
-                        .HasColumnType("int");
+                    b.Property<string>("NumeroConta")
+                        .HasColumnType("longtext");
 
                     b.Property<float>("Saldo")
                         .HasColumnType("float");

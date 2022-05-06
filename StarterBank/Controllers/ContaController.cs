@@ -12,6 +12,7 @@ namespace StarterBank.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]
+    [Authorize]
     public class ContaController : ControllerBase
     {
         private readonly ApplicationDbContext database;
@@ -25,9 +26,9 @@ namespace StarterBank.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "admin")]
         public IActionResult Get()
         {
-
             try
             {
                 var contas = database.Contas.ToList();
@@ -46,6 +47,7 @@ namespace StarterBank.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize(Roles = "admin")]
         public IActionResult GetById(int id)
         {
 
@@ -67,6 +69,7 @@ namespace StarterBank.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "admin")]
         public IActionResult Post([FromBody] ContaRegistroDTO model)
         {
             try
@@ -75,7 +78,7 @@ namespace StarterBank.Controllers
 
                 conta.BancoId = model.BancoId;
                 conta.ClienteId = model.ClienteId;
-                conta.NumeroConta = 1234;
+                conta.NumeroConta = GeraNumeroConta.gerar();
                 conta.Saldo = model.SaldoInicial;
 
                 database.Add(conta);
@@ -139,7 +142,7 @@ namespace StarterBank.Controllers
 
                 conta.BancoId = model.BancoId;
                 conta.ClienteId = model.ClienteId;
-                conta.NumeroConta = 1234;
+                conta.NumeroConta = GeraNumeroConta.gerar();
                 conta.Saldo = model.SaldoInicial;
 
                 database.Update(conta);
@@ -155,6 +158,7 @@ namespace StarterBank.Controllers
 
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "admin")]
         public IActionResult Delete(int id)
         {
             try

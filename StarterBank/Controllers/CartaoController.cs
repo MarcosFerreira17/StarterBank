@@ -11,6 +11,7 @@ namespace StarterBank.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]
+    [Authorize]
     public class CartaoController : ControllerBase
     {
         private readonly ApplicationDbContext database;
@@ -36,7 +37,6 @@ namespace StarterBank.Controllers
         }
 
         [HttpGet("{id}")]
-        //[Authorize("admin")]
         public IActionResult GetById(int id)
         {
             try
@@ -52,7 +52,7 @@ namespace StarterBank.Controllers
         }
 
         [HttpPost("{id}")]
-        //[Authorize("admin")]
+        [Authorize(Roles = "admin")]
         public IActionResult Post(int id, [FromBody] CartaoRegistroDTO model)
         {
             try
@@ -80,6 +80,7 @@ namespace StarterBank.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "admin")]
         public IActionResult Put(int id, [FromBody] CartaoRegistroDTO model)
         {
             try
@@ -98,6 +99,7 @@ namespace StarterBank.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "admin")]
         public IActionResult Delete(int id)
         {
             try

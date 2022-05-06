@@ -13,7 +13,7 @@ namespace StarterBank.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]
-    //[Authorize(Routes = "admin")]
+    [Authorize]
     public class BancoController : ControllerBase
     {
         private readonly ApplicationDbContext database;
@@ -23,6 +23,7 @@ namespace StarterBank.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "admin")]
         public IActionResult Get()
         {
             try
@@ -41,6 +42,7 @@ namespace StarterBank.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize(Roles = "admin")]
         public IActionResult Get(int id)
         {
             try
@@ -59,6 +61,7 @@ namespace StarterBank.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "admin")]
         public IActionResult Post([FromBody] BancoDTO model)
         {
             try
@@ -75,7 +78,7 @@ namespace StarterBank.Controllers
 
                 banco.Faixa = model.Faixa;
                 banco.Nome = model.Nome;
-                banco.NumeroAgencia = model.NumeroAgencia;
+                banco.NumeroAgencia = GeraNumeroConta.gerar();
 
                 database.Add(banco);
                 database.SaveChanges();
@@ -89,6 +92,7 @@ namespace StarterBank.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "admin")]
         public IActionResult Put(int id, BancoDTO model)
         {
             try
@@ -97,7 +101,7 @@ namespace StarterBank.Controllers
 
                 banco.Faixa = model.Faixa;
                 banco.Nome = model.Nome;
-                banco.NumeroAgencia = model.NumeroAgencia;
+                banco.NumeroAgencia = GeraNumeroConta.gerar();
 
                 database.Update(banco);
                 database.SaveChanges();
@@ -111,6 +115,7 @@ namespace StarterBank.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "admin")]
         public IActionResult Delete(int id)
         {
             try

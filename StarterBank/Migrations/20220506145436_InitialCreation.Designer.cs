@@ -9,8 +9,8 @@ using StarterBank.Data;
 namespace StarterBank.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220505171750_UpdateConta")]
-    partial class UpdateConta
+    [Migration("20220506145436_InitialCreation")]
+    partial class InitialCreation
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -25,14 +25,17 @@ namespace StarterBank.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<int>("CaixasEletronicosId")
+                        .HasColumnType("int");
+
                     b.Property<int>("Faixa")
                         .HasColumnType("int");
 
                     b.Property<string>("Nome")
                         .HasColumnType("longtext");
 
-                    b.Property<int>("NumeroAgencia")
-                        .HasColumnType("int");
+                    b.Property<string>("NumeroAgencia")
+                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
@@ -131,17 +134,14 @@ namespace StarterBank.Migrations
                     b.Property<int>("BancoId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CaixaEletronicoId")
-                        .HasColumnType("int");
-
                     b.Property<int>("CartaoId")
                         .HasColumnType("int");
 
                     b.Property<int>("ClienteId")
                         .HasColumnType("int");
 
-                    b.Property<int>("NumeroConta")
-                        .HasColumnType("int");
+                    b.Property<string>("NumeroConta")
+                        .HasColumnType("longtext");
 
                     b.Property<float>("Saldo")
                         .HasColumnType("float");
@@ -153,15 +153,36 @@ namespace StarterBank.Migrations
                     b.ToTable("Contas");
                 });
 
+            modelBuilder.Entity("StarterBank.Model.Extrato", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("BancoId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ContaId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ValorDoDeposito")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ValorDoSaque")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Extratos");
+                });
+
             modelBuilder.Entity("StarterBank.Model.CaixaEletronico", b =>
                 {
-                    b.HasOne("StarterBank.Model.Banco", "Banco")
-                        .WithMany()
+                    b.HasOne("StarterBank.Model.Banco", null)
+                        .WithMany("CaixasEletronicos")
                         .HasForeignKey("BancoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Banco");
                 });
 
             modelBuilder.Entity("StarterBank.Model.Conta", b =>
@@ -175,6 +196,8 @@ namespace StarterBank.Migrations
 
             modelBuilder.Entity("StarterBank.Model.Banco", b =>
                 {
+                    b.Navigation("CaixasEletronicos");
+
                     b.Navigation("Contas");
                 });
 #pragma warning restore 612, 618

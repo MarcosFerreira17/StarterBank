@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using StarterBank.Data;
@@ -11,7 +12,7 @@ namespace StarterBank.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]
-    // [Authorize(Roles = "admin")]
+    [Authorize]
     public class CaixaEletronicoController : ControllerBase
     {
         private readonly ApplicationDbContext database;
@@ -23,6 +24,7 @@ namespace StarterBank.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "admin")]
         public IActionResult Get()
         {
             try
@@ -38,6 +40,7 @@ namespace StarterBank.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize(Roles = "admin")]
         public IActionResult GetById(int id)
         {
             try
@@ -53,6 +56,7 @@ namespace StarterBank.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "admin")]
         public IActionResult PostNovoCaixa([FromBody] CaixaEletronicoDTO model)
         {
             try
@@ -83,6 +87,7 @@ namespace StarterBank.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "admin")]
         public IActionResult PutDeposito(int id, [FromBody] CaixaEletronicoDTO model)
         {
             try
@@ -111,6 +116,7 @@ namespace StarterBank.Controllers
         }
 
         [HttpPost("{id}")]
+        [Authorize(Roles = "admin")]
         public IActionResult PostByIdSaque(int id, [FromForm] int valor)
         {
             try
@@ -259,6 +265,7 @@ namespace StarterBank.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "admin")]
         public IActionResult Delete(int id)
         {
 

@@ -1,17 +1,17 @@
-using System.Net;
 using System;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using StarterBank.Data;
 using StarterBank.Helpers;
 using StarterBank.Model;
-using Microsoft.EntityFrameworkCore;
 
 namespace StarterBank.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]
+    [Authorize]
     public class ClienteController : ControllerBase
     {
         private readonly ApplicationDbContext database;
@@ -21,6 +21,7 @@ namespace StarterBank.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "admin")]
         public IActionResult Get()
         {
             try
@@ -39,6 +40,7 @@ namespace StarterBank.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize(Roles = "admin")]
         public IActionResult GetById(int id)
         {
             try
@@ -57,6 +59,7 @@ namespace StarterBank.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "admin")]
         public IActionResult Post([FromBody] ClienteDTO model)
         {
             try
@@ -83,6 +86,7 @@ namespace StarterBank.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "admin")]
         public IActionResult Put(int id, [FromBody] ClienteEditarDTO model)
         {
             try
@@ -106,6 +110,7 @@ namespace StarterBank.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "admin")]
         public IActionResult Delete(int id)
         {
             try
