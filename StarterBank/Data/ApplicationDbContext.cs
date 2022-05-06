@@ -11,6 +11,7 @@ namespace StarterBank.Data
         public DbSet<CaixaEletronico> CaixaEletronico { get; set; }
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Conta> Contas { get; set; }
+        public DbSet<Extrato> Extratos { get; set; }
         public DbSet<Cartao> Cartoes { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }

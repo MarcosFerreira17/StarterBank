@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StarterBank.Data;
 
 namespace StarterBank.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220506132609_ExtratoUpdate")]
+    partial class ExtratoUpdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -161,9 +163,6 @@ namespace StarterBank.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("ContaId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ValorDoDeposito")
                         .HasColumnType("int");
 
                     b.Property<int>("ValorDoSaque")

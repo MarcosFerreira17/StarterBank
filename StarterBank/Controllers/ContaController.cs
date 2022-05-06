@@ -16,9 +16,11 @@ namespace StarterBank.Controllers
     {
         private readonly ApplicationDbContext database;
         private readonly CaixaEletronicoController _caixaController;
+        private readonly ExtratoController _extratoController;
         public ContaController(ApplicationDbContext database)
         {
             this.database = database;
+            _extratoController = new ExtratoController(database);
             _caixaController = new CaixaEletronicoController(database);
         }
 
@@ -90,10 +92,8 @@ namespace StarterBank.Controllers
         [HttpPost("{id}")]
         public IActionResult Saque(int id, [FromForm] int valor)
         {
-
             try
             {
-
                 if (ValidaSaque.Valor(valor) != true)
                 {
                     throw new Exception("O caixa trabalha somente com as seguintes notas: R$ 10 R$20 R$50 R$100.");
@@ -114,6 +114,7 @@ namespace StarterBank.Controllers
                     conta.Saldo -= valor;
                     database.Update(conta);
                     database.SaveChanges();
+                    _extratoController.Post(conta.BancoId, conta.Id, valor, 0);
                     return Ok(new { msg = "Realizado com sucesso o saque no valor de R$" + valor.ToString("f2") });
                 }
                 else
@@ -126,7 +127,6 @@ namespace StarterBank.Controllers
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
                    $"Erro ao tentar registrar saque, verifique os dados e tente novamente. Erro: {ex.Message}");
             }
-
         }
 
         [HttpPut("{id}")]
