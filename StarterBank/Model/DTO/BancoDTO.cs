@@ -9,7 +9,7 @@ namespace StarterBank.Model.DTO
         public string Nome { get; set; }
         [Required]
         public int Faixa { get; set; }
-        [Required]
-        public int NumeroAgencia { get; set; }
+        public int CaixaEletronicoId { get; set; }
+
     }
 }

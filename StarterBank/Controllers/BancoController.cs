@@ -67,6 +67,8 @@ namespace StarterBank.Controllers
             try
             {
                 var bancoDados = database.Bancos.ToList();
+                if (model.Faixa < 1000) { throw new Exception("A faixa precisa ser maior que 1000."); }
+                if (model.Faixa > 9999) { throw new Exception("A faixa precisa ser menor que 10000."); }
                 foreach (var item in bancoDados)
                 {
                     if (item.Faixa == model.Faixa)
@@ -98,6 +100,27 @@ namespace StarterBank.Controllers
             try
             {
                 var banco = database.Bancos.First(i => i.Id == id);
+                var listaBancos = database.Bancos.ToList();
+                var listaCaixa = database.CaixaEletronico.ToList();
+
+                if (model.Faixa < 1000) { throw new Exception("A faixa precisa ser maior que 1000."); }
+                if (model.Faixa > 9999) { throw new Exception("A faixa precisa ser menor que 10000."); }
+
+                foreach (var caixa in listaCaixa)
+                {
+                    if (caixa.Id == model.CaixaEletronicoId)
+                    {
+                        banco.CaixasEletronicosId = model.CaixaEletronicoId;
+                    }
+                }
+
+                foreach (var bancos in listaBancos)
+                {
+                    if (bancos.Faixa == model.Faixa)
+                    {
+                        throw new Exception("Esta faixa já existe no banco, tente outra.");
+                    }
+                }
 
                 banco.Faixa = model.Faixa;
                 banco.Nome = model.Nome;

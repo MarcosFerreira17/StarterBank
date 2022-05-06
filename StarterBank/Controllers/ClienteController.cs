@@ -64,10 +64,9 @@ namespace StarterBank.Controllers
         {
             try
             {
-                var dadosCliente = database.Clientes.ToList();
                 Cliente cliente = new Cliente();
 
-                if (CheckCPF.CPF(model.CPF) == false) { return NoContent(); }
+                if (CheckCPF.CPF(model.CPF) == false) { throw new Exception("CPF Inválido."); }
 
                 cliente.Nome = model.Nome;
                 cliente.Profissao = model.Profissao;
