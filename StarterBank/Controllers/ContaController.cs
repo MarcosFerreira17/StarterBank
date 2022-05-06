@@ -25,6 +25,9 @@ namespace StarterBank.Controllers
             _caixaController = new CaixaEletronicoController(database);
         }
 
+        /// <summary>
+        /// Retorna todas as contas do banco.
+        /// </summary>
         [HttpGet]
         [Authorize(Roles = "admin")]
         public IActionResult Get()
@@ -45,7 +48,9 @@ namespace StarterBank.Controllers
 
             }
         }
-
+        /// <summary>
+        /// Retorna uma conta por Id
+        /// </summary>
         [HttpGet("{id}")]
         [Authorize(Roles = "admin")]
         public IActionResult GetById(int id)
@@ -67,7 +72,9 @@ namespace StarterBank.Controllers
 
             }
         }
-
+        /// <summary>
+        /// Cria uma nova conta no banco.
+        /// </summary>
         [HttpPost]
         [Authorize(Roles = "admin")]
         public IActionResult Post([FromBody] ContaRegistroDTO model)
@@ -91,7 +98,9 @@ namespace StarterBank.Controllers
                    $"Erro ao tentar registrar uma nova Conta, verifique os dados e tente novamente. Erro: {ex.Message}");
             }
         }
-
+        /// <summary>
+        /// Realiza um saque na conta por id e retira o saldo/notas do caixa eletronico.
+        /// </summary>
         [HttpPost("{id}")]
         public IActionResult Saque(int id, [FromForm] int valor)
         {
@@ -131,7 +140,9 @@ namespace StarterBank.Controllers
                    $"Erro ao tentar registrar saque, verifique os dados e tente novamente. Erro: {ex.Message}");
             }
         }
-
+        /// <summary>
+        /// Edita uma conta por id
+        /// </summary>
         [HttpPut("{id}")]
         [Authorize(Roles = "admin")]
         public IActionResult Put(int id, [FromBody] ContaRegistroDTO model)
@@ -156,7 +167,9 @@ namespace StarterBank.Controllers
             }
         }
 
-
+        /// <summary>
+        /// Deleta uma conta por id.
+        /// </summary>
         [HttpDelete("{id}")]
         [Authorize(Roles = "admin")]
         public IActionResult Delete(int id)

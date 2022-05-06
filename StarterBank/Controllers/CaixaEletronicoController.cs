@@ -23,6 +23,9 @@ namespace StarterBank.Controllers
             _extratoController = new ExtratoController(database);
         }
 
+        /// <summary>
+        /// retorna todos os caixas eletronicos
+        /// </summary>
         [HttpGet]
         [Authorize(Roles = "admin")]
         public IActionResult Get()
@@ -38,7 +41,9 @@ namespace StarterBank.Controllers
                   $"Erro ao tentar buscar lista de caixas caixa. Erro: {ex.Message}");
             }
         }
-
+        /// <summary>
+        /// Retorna um caixa eletronico por id
+        /// </summary>
         [HttpGet("{id}")]
         [Authorize(Roles = "admin")]
         public IActionResult GetById(int id)
@@ -55,6 +60,9 @@ namespace StarterBank.Controllers
             }
         }
 
+        /// <summary>
+        /// Cria um novo caixa eletronico
+        /// </summary>
         [HttpPost]
         [Authorize(Roles = "admin")]
         public IActionResult PostNovoCaixa([FromBody] CaixaEletronicoDTO model)
@@ -86,6 +94,9 @@ namespace StarterBank.Controllers
             }
         }
 
+        /// <summary>
+        /// Adiciona notas no caixa eletronico
+        /// </summary>
         [HttpPut("{id}")]
         [Authorize(Roles = "admin")]
         public IActionResult PutDeposito(int id, [FromBody] CaixaEletronicoDTO model)
@@ -115,6 +126,9 @@ namespace StarterBank.Controllers
             }
         }
 
+        /// <summary>
+        /// Retira notas do saldo do caixa eletronico, recebe como paremetro o id o caixa eletronico e o valor para saque
+        /// </summary>
         [HttpPost("{id}")]
         [Authorize(Roles = "admin")]
         public IActionResult PostByIdSaque(int id, [FromForm] int valor)
@@ -190,6 +204,9 @@ namespace StarterBank.Controllers
             }
         }
 
+        /// <summary>
+        /// Realiza o saque no caixa eletronico e retira o saldo da conta do cliente, recebe como parametro o id do caixa, o id do cliente e o valor do saque
+        /// </summary>
         [HttpPatch("{idCaixa}/{idContaCliente}")]
         public IActionResult PatchDepositoCliente(int idCaixa, int idContaCliente, int valor)
         {
@@ -264,6 +281,9 @@ namespace StarterBank.Controllers
             }
         }
 
+        /// <summary>
+        /// Deleta um caixa eletronico por id
+        /// </summary>
         [HttpDelete("{id}")]
         [Authorize(Roles = "admin")]
         public IActionResult Delete(int id)

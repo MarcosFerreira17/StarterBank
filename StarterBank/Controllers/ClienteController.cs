@@ -20,6 +20,9 @@ namespace StarterBank.Controllers
             this.database = database;
         }
 
+        /// <summary>
+        /// retorna todos os clientes
+        /// </summary>
         [HttpGet]
         [Authorize(Roles = "admin")]
         public IActionResult Get()
@@ -39,6 +42,9 @@ namespace StarterBank.Controllers
             }
         }
 
+        /// <summary>
+        /// Retorna um cliente por id
+        /// </summary>
         [HttpGet("{id}")]
         [Authorize(Roles = "admin")]
         public IActionResult GetById(int id)
@@ -57,7 +63,9 @@ namespace StarterBank.Controllers
                   $"Erro ao tentar buscar cliente. Erro: {ex.Message}");
             }
         }
-
+        /// <summary>
+        /// Cria um novo cliente
+        /// </summary>
         [HttpPost]
         [Authorize(Roles = "admin")]
         public IActionResult Post([FromBody] ClienteDTO model)
@@ -83,7 +91,9 @@ namespace StarterBank.Controllers
                    $"Erro ao tentar registrar um novo Cliente, verifique os dados e tente novamente. Erro: {ex.Message}");
             }
         }
-
+        /// <summary>
+        /// Atualiza os dados do cliente por id
+        /// </summary>
         [HttpPut("{id}")]
         [Authorize(Roles = "admin")]
         public IActionResult Put(int id, [FromBody] ClienteEditarDTO model)
@@ -107,7 +117,9 @@ namespace StarterBank.Controllers
                    $"Erro ao tentar atualizar Cliente, verifique os dados e tente novamente. Erro: {ex.Message}");
             }
         }
-
+        /// <summary>
+        /// Deleta um cliente por id
+        /// </summary>
         [HttpDelete("{id}")]
         [Authorize(Roles = "admin")]
         public IActionResult Delete(int id)

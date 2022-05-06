@@ -118,3 +118,5 @@ C:\dev\Projeto_Starter\Desafio_TDD\API_StarterBank\StarterBank\bin\Debug\net5.0\
 C:\dev\Projeto_Starter\Desafio_TDD\API_StarterBank\StarterBank\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 C:\dev\Projeto_Starter\Desafio_TDD\API_StarterBank\StarterBank\bin\Debug\net5.0\Microsoft.IdentityModel.Tokens.dll
 C:\dev\Projeto_Starter\Desafio_TDD\API_StarterBank\StarterBank\bin\Debug\net5.0\System.IdentityModel.Tokens.Jwt.dll
+C:\dev\Projeto_Starter\Desafio_TDD\API_StarterBank\StarterBank\bin\Debug\net5.0\StarterBank.xml
+C:\dev\Projeto_Starter\Desafio_TDD\API_StarterBank\StarterBank\obj\Debug\net5.0\StarterBank.xml

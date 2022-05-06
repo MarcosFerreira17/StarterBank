@@ -20,8 +20,11 @@ namespace StarterBank.Controllers
             this.database = database;
         }
 
+        /// <summary>
+        /// Retorna todos os cartoes cadastrados no banco
+        /// </summary>
         [HttpGet]
-        //        [Authorize(Roles = "user_comum")]
+        [Authorize(Roles = "user_comum")]
         public IActionResult Get()
         {
             try
@@ -35,7 +38,9 @@ namespace StarterBank.Controllers
                  $"Erro ao tentar registrar um novo usuário, verifique a conta vinculada ao cartão e tente novamente. Erro: {ex.Message}");
             }
         }
-
+        /// <summary>
+        /// Retorna um cartão por id
+        /// </summary>
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
@@ -51,6 +56,9 @@ namespace StarterBank.Controllers
             }
         }
 
+        /// <summary>
+        /// Cria um novo cartão, recebe como parametro o id de uma conta.
+        /// </summary>
         [HttpPost("{id}")]
         [Authorize(Roles = "admin")]
         public IActionResult Post(int id, [FromBody] CartaoRegistroDTO model)
@@ -79,6 +87,9 @@ namespace StarterBank.Controllers
             }
         }
 
+        /// <summary>
+        /// Atualiza um cartão por id
+        /// </summary>
         [HttpPut("{id}")]
         [Authorize(Roles = "admin")]
         public IActionResult Put(int id, [FromBody] CartaoRegistroDTO model)
@@ -98,6 +109,9 @@ namespace StarterBank.Controllers
             }
         }
 
+        /// <summary>
+        /// Deleta um cartão por id
+        /// </summary>
         [HttpDelete("{id}")]
         [Authorize(Roles = "admin")]
         public IActionResult Delete(int id)

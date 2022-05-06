@@ -22,6 +22,9 @@ namespace StarterBank.Controllers
             this.database = database;
         }
 
+        /// <summary>
+        /// Retorna todos os bancos
+        /// </summary>
         [HttpGet]
         [Authorize(Roles = "admin")]
         public IActionResult Get()
@@ -41,6 +44,9 @@ namespace StarterBank.Controllers
             }
         }
 
+        /// <summary>
+        /// Retorno banco por id
+        /// </summary>
         [HttpGet("{id}")]
         [Authorize(Roles = "admin")]
         public IActionResult Get(int id)
@@ -60,6 +66,9 @@ namespace StarterBank.Controllers
             }
         }
 
+        /// <summary>
+        /// Cria um novo banco
+        /// </summary>
         [HttpPost]
         [Authorize(Roles = "admin")]
         public IActionResult Post([FromBody] BancoDTO model)
@@ -93,6 +102,9 @@ namespace StarterBank.Controllers
             }
         }
 
+        /// <summary>
+        /// Atualiza o saçdp do banco
+        /// </summary>
         [HttpPut("{id}")]
         [Authorize(Roles = "admin")]
         public IActionResult Put(int id, BancoDTO model)
@@ -137,6 +149,9 @@ namespace StarterBank.Controllers
             }
         }
 
+        /// <summary>
+        /// Deleta um Banco por id, assim como contas, cartoes e clientes relacionados.
+        /// </summary>
         [HttpDelete("{id}")]
         [Authorize(Roles = "admin")]
         public IActionResult Delete(int id)

@@ -1,0 +1,173 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>StarterBank</name>
+    </assembly>
+    <members>
+        <member name="M:StarterBank.Controllers.AuthenticationController.Acesso(StarterBank.Model.CartaoLoginDTO)">
+            <summary>
+            Retorna token JWT para acesso aos endpoints
+            </summary>
+        </member>
+        <member name="M:StarterBank.Controllers.BancoController.Get">
+            <summary>
+            Retorna todos os bancos
+            </summary>
+        </member>
+        <member name="M:StarterBank.Controllers.BancoController.Get(System.Int32)">
+            <summary>
+            Retorno banco por id
+            </summary>
+        </member>
+        <member name="M:StarterBank.Controllers.BancoController.Post(StarterBank.Model.DTO.BancoDTO)">
+            <summary>
+            Cria um novo banco
+            </summary>
+        </member>
+        <member name="M:StarterBank.Controllers.BancoController.Put(System.Int32,StarterBank.Model.DTO.BancoDTO)">
+            <summary>
+            Atualiza o saçdp do banco
+            </summary>
+        </member>
+        <member name="M:StarterBank.Controllers.BancoController.Delete(System.Int32)">
+            <summary>
+            Deleta um Banco por id, assim como contas, cartoes e clientes relacionados.
+            </summary>
+        </member>
+        <member name="M:StarterBank.Controllers.CaixaEletronicoController.Get">
+            <summary>
+            retorna todos os caixas eletronicos
+            </summary>
+        </member>
+        <member name="M:StarterBank.Controllers.CaixaEletronicoController.GetById(System.Int32)">
+            <summary>
+            Retorna um caixa eletronico por id
+            </summary>
+        </member>
+        <member name="M:StarterBank.Controllers.CaixaEletronicoController.PostNovoCaixa(StarterBank.Model.DTO.CaixaEletronicoDTO)">
+            <summary>
+            Cria um novo caixa eletronico
+            </summary>
+        </member>
+        <member name="M:StarterBank.Controllers.CaixaEletronicoController.PutDeposito(System.Int32,StarterBank.Model.DTO.CaixaEletronicoDTO)">
+            <summary>
+            Adiciona notas no caixa eletronico
+            </summary>
+        </member>
+        <member name="M:StarterBank.Controllers.CaixaEletronicoController.PostByIdSaque(System.Int32,System.Int32)">
+            <summary>
+            Retira notas do saldo do caixa eletronico, recebe como paremetro o id o caixa eletronico e o valor para saque
+            </summary>
+        </member>
+        <member name="M:StarterBank.Controllers.CaixaEletronicoController.PatchDepositoCliente(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Realiza o saque no caixa eletronico e retira o saldo da conta do cliente, recebe como parametro o id do caixa, o id do cliente e o valor do saque
+            </summary>
+        </member>
+        <member name="M:StarterBank.Controllers.CaixaEletronicoController.Delete(System.Int32)">
+            <summary>
+            Deleta um caixa eletronico por id
+            </summary>
+        </member>
+        <member name="M:StarterBank.Controllers.CartaoController.Get">
+            <summary>
+            Retorna todos os cartoes cadastrados no banco
+            </summary>
+        </member>
+        <member name="M:StarterBank.Controllers.CartaoController.GetById(System.Int32)">
+            <summary>
+            Retorna um cartão por id
+            </summary>
+        </member>
+        <member name="M:StarterBank.Controllers.CartaoController.Post(System.Int32,StarterBank.Model.CartaoRegistroDTO)">
+            <summary>
+            Cria um novo cartão, recebe como parametro o id de uma conta.
+            </summary>
+        </member>
+        <member name="M:StarterBank.Controllers.CartaoController.Put(System.Int32,StarterBank.Model.CartaoRegistroDTO)">
+            <summary>
+            Atualiza um cartão por id
+            </summary>
+        </member>
+        <member name="M:StarterBank.Controllers.CartaoController.Delete(System.Int32)">
+            <summary>
+            Deleta um cartão por id
+            </summary>
+        </member>
+        <member name="M:StarterBank.Controllers.ClienteController.Get">
+            <summary>
+            retorna todos os clientes
+            </summary>
+        </member>
+        <member name="M:StarterBank.Controllers.ClienteController.GetById(System.Int32)">
+            <summary>
+            Retorna um cliente por id
+            </summary>
+        </member>
+        <member name="M:StarterBank.Controllers.ClienteController.Post(StarterBank.Model.ClienteDTO)">
+            <summary>
+            Cria um novo cliente
+            </summary>
+        </member>
+        <member name="M:StarterBank.Controllers.ClienteController.Put(System.Int32,StarterBank.Model.ClienteEditarDTO)">
+            <summary>
+            Atualiza os dados do cliente por id
+            </summary>
+        </member>
+        <member name="M:StarterBank.Controllers.ClienteController.Delete(System.Int32)">
+            <summary>
+            Deleta um cliente por id
+            </summary>
+        </member>
+        <member name="M:StarterBank.Controllers.ContaController.Get">
+            <summary>
+            Retorna todas as contas do banco.
+            </summary>
+        </member>
+        <member name="M:StarterBank.Controllers.ContaController.GetById(System.Int32)">
+            <summary>
+            Retorna uma conta por Id
+            </summary>
+        </member>
+        <member name="M:StarterBank.Controllers.ContaController.Post(StarterBank.Model.ContaRegistroDTO)">
+            <summary>
+            Cria uma nova conta no banco.
+            </summary>
+        </member>
+        <member name="M:StarterBank.Controllers.ContaController.Saque(System.Int32,System.Int32)">
+            <summary>
+            Realiza um saque na conta por id e retira o saldo/notas do caixa eletronico.
+            </summary>
+        </member>
+        <member name="M:StarterBank.Controllers.ContaController.Put(System.Int32,StarterBank.Model.ContaRegistroDTO)">
+            <summary>
+            Edita uma conta por id
+            </summary>
+        </member>
+        <member name="M:StarterBank.Controllers.ContaController.Delete(System.Int32)">
+            <summary>
+            Deleta uma conta por id.
+            </summary>
+        </member>
+        <member name="M:StarterBank.Controllers.ExtratoController.Get">
+            <summary>
+            Retorna todos os extratos registrados no banco.
+            </summary>
+        </member>
+        <member name="M:StarterBank.Controllers.ExtratoController.GetById(System.Int32)">
+            <summary>
+            Retorna um extrato especifico por id.
+            </summary>
+        </member>
+        <member name="M:StarterBank.Controllers.ExtratoController.Post(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Cria um novo extrato.
+            </summary>
+        </member>
+        <member name="M:StarterBank.Controllers.ExtratoController.Delete(System.Int32)">
+            <summary>
+            Deleta um extrato por id
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -23,6 +23,9 @@ namespace StarterBank.Controllers
             this.database = database;
         }
 
+        /// <summary>
+        /// Retorna token JWT para acesso aos endpoints
+        /// </summary>
         [HttpPost]
         public IActionResult Acesso([FromBody] CartaoLoginDTO credentials)
         {

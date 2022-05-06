@@ -20,6 +20,9 @@ namespace StarterBank.Controllers
             this.database = database;
         }
 
+        /// <summary>
+        /// Retorna todos os extratos registrados no banco.
+        /// </summary>
         [HttpGet]
         [Authorize(Roles = "admin")]
         public IActionResult Get()
@@ -39,6 +42,9 @@ namespace StarterBank.Controllers
             }
         }
 
+        /// <summary>
+        /// Retorna um extrato especifico por id.
+        /// </summary>
         [HttpGet("{id}")]
         [Authorize(Roles = "admin")]
         public IActionResult GetById(int id)
@@ -57,7 +63,9 @@ namespace StarterBank.Controllers
                   $"Erro ao tentar buscar extrato. Erro: {ex.Message}");
             }
         }
-
+        /// <summary>
+        /// Cria um novo extrato.
+        /// </summary>
         [HttpPost]
         public IActionResult Post(int bancoId, int contaId, int valorSaque, int ValorDoDeposito)
         {
@@ -80,7 +88,9 @@ namespace StarterBank.Controllers
                    $"Erro ao tentar registrar um novo extrato, verifique os dados e tente novamente. Erro: {ex.Message}");
             }
         }
-
+        /// <summary>
+        /// Deleta um extrato por id
+        /// </summary>
         [HttpDelete("{id}")]
         [Authorize(Roles = "admin")]
         public IActionResult Delete(int id)
