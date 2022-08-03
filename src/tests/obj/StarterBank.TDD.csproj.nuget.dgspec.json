@@ -1,33 +1,38 @@
 {
   "format": 1,
   "restore": {
-    "c:\\dev\\Projeto_Starter\\Desafio_TDD\\API_StarterBank\\StarterBank.TDD\\StarterBank.TDD.csproj": {}
+    "C:\\dev\\my_projects\\starter-bank\\src\\tests\\StarterBank.TDD.csproj": {}
   },
   "projects": {
-    "c:\\dev\\Projeto_Starter\\Desafio_TDD\\API_StarterBank\\StarterBank.TDD\\StarterBank.TDD.csproj": {
+    "C:\\dev\\my_projects\\starter-bank\\src\\tests\\StarterBank.TDD.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\dev\\Projeto_Starter\\Desafio_TDD\\API_StarterBank\\StarterBank.TDD\\StarterBank.TDD.csproj",
+        "projectUniqueName": "C:\\dev\\my_projects\\starter-bank\\src\\tests\\StarterBank.TDD.csproj",
         "projectName": "StarterBank.TDD",
-        "projectPath": "c:\\dev\\Projeto_Starter\\Desafio_TDD\\API_StarterBank\\StarterBank.TDD\\StarterBank.TDD.csproj",
-        "packagesPath": "C:\\Users\\mnia\\.nuget\\packages\\",
-        "outputPath": "c:\\dev\\Projeto_Starter\\Desafio_TDD\\API_StarterBank\\StarterBank.TDD\\obj\\",
+        "projectPath": "C:\\dev\\my_projects\\starter-bank\\src\\tests\\StarterBank.TDD.csproj",
+        "packagesPath": "C:\\Users\\marco\\.nuget\\packages\\",
+        "outputPath": "C:\\dev\\my_projects\\starter-bank\\src\\tests\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\mnia\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\marco\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "c:\\dev\\Projeto_Starter\\Desafio_TDD\\API_StarterBank\\StarterBank\\StarterBank.csproj": {
-                "projectPath": "c:\\dev\\Projeto_Starter\\Desafio_TDD\\API_StarterBank\\StarterBank\\StarterBank.csproj"
+              "C:\\dev\\my_projects\\starter-bank\\src\\StarterBank\\StarterBank.csproj": {
+                "projectPath": "C:\\dev\\my_projects\\starter-bank\\src\\StarterBank\\StarterBank.csproj"
               }
             }
           }
@@ -78,100 +83,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files (x86)\\dotnet\\sdk\\5.0.407\\RuntimeIdentifierGraph.json"
-        }
-      }
-    },
-    "c:\\dev\\Projeto_Starter\\Desafio_TDD\\API_StarterBank\\StarterBank\\StarterBank.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "c:\\dev\\Projeto_Starter\\Desafio_TDD\\API_StarterBank\\StarterBank\\StarterBank.csproj",
-        "projectName": "StarterBank",
-        "projectPath": "c:\\dev\\Projeto_Starter\\Desafio_TDD\\API_StarterBank\\StarterBank\\StarterBank.csproj",
-        "packagesPath": "C:\\Users\\mnia\\.nuget\\packages\\",
-        "outputPath": "c:\\dev\\Projeto_Starter\\Desafio_TDD\\API_StarterBank\\StarterBank\\obj\\",
-        "projectStyle": "PackageReference",
-        "configFilePaths": [
-          "C:\\Users\\mnia\\AppData\\Roaming\\NuGet\\NuGet.Config"
-        ],
-        "originalTargetFrameworks": [
-          "net5.0"
-        ],
-        "sources": {
-          "https://api.nuget.org/v3/index.json": {}
-        },
-        "frameworks": {
-          "net5.0": {
-            "targetAlias": "net5.0",
-            "projectReferences": {}
-          }
-        },
-        "warningProperties": {
-          "warnAsError": [
-            "NU1605"
-          ]
-        }
-      },
-      "frameworks": {
-        "net5.0": {
-          "targetAlias": "net5.0",
-          "dependencies": {
-            "Microsoft.AspNetCore.Authentication.JwtBearer": {
-              "target": "Package",
-              "version": "[5.0.16, )"
-            },
-            "Microsoft.EntityFrameworkCore": {
-              "target": "Package",
-              "version": "[5.0.16, )"
-            },
-            "Microsoft.EntityFrameworkCore.Design": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[5.0.16, )"
-            },
-            "Microsoft.EntityFrameworkCore.Tools": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[5.0.16, )"
-            },
-            "Microsoft.IdentityModel.Tokens": {
-              "target": "Package",
-              "version": "[6.17.0, )"
-            },
-            "Pomelo.EntityFrameworkCore.MySql": {
-              "target": "Package",
-              "version": "[5.0.4, )"
-            },
-            "Swashbuckle.AspNetCore": {
-              "target": "Package",
-              "version": "[5.6.3, )"
-            },
-            "System.IdentityModel.Tokens.Jwt": {
-              "target": "Package",
-              "version": "[6.17.0, )"
-            }
-          },
-          "imports": [
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48"
-          ],
-          "assetTargetFallback": true,
-          "warn": true,
-          "frameworkReferences": {
-            "Microsoft.AspNetCore.App": {
-              "privateAssets": "none"
-            },
-            "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            }
-          },
-          "runtimeIdentifierGraphPath": "C:\\Program Files (x86)\\dotnet\\sdk\\5.0.407\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     }
