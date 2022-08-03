@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "KJXq2VqVqYK9QDfXg1y1qMxdTyJ32Pz3tfxAQKVX1clqvRiG3zabj90E/22vhJn3FLofz4DmA+ygFQYeflj0yA==",
+  "dgSpecHash": "rPbam0UMMO9TKvfpPyAgBCj31/0nz2nWB3IrnErrctBATvIsopVRsFvKqOGcubn2X8LzJKfwP1itI7qQw+qLAQ==",
   "success": false,
   "projectFilePath": "C:\\dev\\my_projects\\starter-bank\\src\\tests\\StarterBank.TDD.csproj",
   "expectedPackageFiles": [

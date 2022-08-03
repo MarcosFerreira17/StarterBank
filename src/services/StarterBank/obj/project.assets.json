@@ -1311,11 +1311,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\dev\\my_projects\\starter-bank\\src\\services\\StarterBank\\StarterBank.csproj",
+      "projectUniqueName": "C:\\dev\\my_projects\\starter-bank\\src\\services\\StarterBank\\StarterBank.csproj",
       "projectName": "StarterBank",
-      "projectPath": "c:\\dev\\my_projects\\starter-bank\\src\\services\\StarterBank\\StarterBank.csproj",
+      "projectPath": "C:\\dev\\my_projects\\starter-bank\\src\\services\\StarterBank\\StarterBank.csproj",
       "packagesPath": "C:\\Users\\marco\\.nuget\\packages\\",
-      "outputPath": "c:\\dev\\my_projects\\starter-bank\\src\\services\\StarterBank\\obj\\",
+      "outputPath": "C:\\dev\\my_projects\\starter-bank\\src\\services\\StarterBank\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -1402,7 +1402,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.408\\RuntimeIdentifierGraph.json"
       }
     }
   }
